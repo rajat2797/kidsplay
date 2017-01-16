@@ -14,6 +14,9 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -31,6 +34,9 @@ public class homepage extends AppCompatActivity {
     private boolean flag;
     int wincount = 0;
     private final int dataavailable = 5;
+
+    ImageView[] star;
+    float x,y;
 
     DisplayMetrics displayMetrics;
 
@@ -57,6 +63,7 @@ public class homepage extends AppCompatActivity {
         initializecolor();
         initializedances();
         initialize();
+        initialisestars();
 
         tts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
@@ -154,9 +161,9 @@ public class homepage extends AppCompatActivity {
                 &&(checkpar.leftMargin+125>=marleft&&checkpar.leftMargin+125<=marright)
                 ){
             flag=false;
-            appreciate();
             wincount+=1;
-            if( wincount==5 ){
+            appreciate();
+            if( wincount==5 ) {
                 showdance();
                 wincount = 0;
             }
@@ -217,6 +224,13 @@ public class homepage extends AppCompatActivity {
         };
         Handler h =new Handler();
         h.postDelayed(r,6000);
+
+        star[1].setVisibility(View.INVISIBLE);
+        star[2].setVisibility(View.INVISIBLE);
+        star[3].setVisibility(View.INVISIBLE);
+        star[4].setVisibility(View.INVISIBLE);
+        star[5].setVisibility(View.INVISIBLE);
+
     }
 
                                 /*.....................................................*/
@@ -308,6 +322,24 @@ public class homepage extends AppCompatActivity {
         letsdance[6]="mycartoonanimation6";
     }
 
+//    initialising stars
+    private void initialisestars() {
+        star = new ImageView[6];
+        star[1] = (ImageView) findViewById(R.id.star1);
+        star[2] = (ImageView) findViewById(R.id.star2);
+        star[3] = (ImageView) findViewById(R.id.star3);
+        star[4] = (ImageView) findViewById(R.id.star4);
+        star[5] = (ImageView) findViewById(R.id.star5);
+
+        star[1].setVisibility(View.INVISIBLE);
+        star[2].setVisibility(View.INVISIBLE);
+        star[3].setVisibility(View.INVISIBLE);
+        star[4].setVisibility(View.INVISIBLE);
+        star[5].setVisibility(View.INVISIBLE);
+
+    }
+
+
                                         /*.................................................*/
 
 
@@ -321,6 +353,9 @@ public class homepage extends AppCompatActivity {
             case 4:tts.speak("Awesome",TextToSpeech.QUEUE_FLUSH,null,null);break;
             case 5:tts.speak("Outstanding",TextToSpeech.QUEUE_FLUSH,null,null);break;
         }
+
+        showstar();
+
     }
     private void tryitagain(){
         int rand = (int)(Math.random()*5)+1;
@@ -412,5 +447,91 @@ public class homepage extends AppCompatActivity {
             }
         }
     }
+
+//    Animatioins
+
+    public void fadein(View view) {
+
+        Animation fade_in = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        view.setAnimation(fade_in);
+    }
+
+    public void moveImageView(View view, float toX, float toY, int duration) {
+
+        Animation rotate_anim = AnimationUtils.loadAnimation(this, R.anim.rotation);
+        view.setAnimation(rotate_anim);
+
+        view.animate()
+                .setInterpolator(new AccelerateDecelerateInterpolator())
+                .translationX(toX)
+                .translationY(toY)
+                .setDuration(duration);
+    }
+
+    public void setstarsize() {
+
+        ViewGroup.LayoutParams sizerules = star[wincount].getLayoutParams();
+        sizerules.width = 200;
+        sizerules.height = 220;
+        star[wincount].setLayoutParams(sizerules);
+
+    }
+
+    private void showstar() {
+
+        y = -800;
+        switch(wincount) {
+
+            case 1:
+
+                star[1].setVisibility(View.VISIBLE);
+                fadein(star[1]);
+                x = -410;
+                moveImageView(star[1], x, y, 1000);
+                setstarsize();
+                break;
+
+            case 2:
+
+                star[2].setVisibility(View.VISIBLE);
+                fadein(star[2]);
+                x = x+200;
+                moveImageView(star[2], x, y, 1000);
+                setstarsize();
+                break;
+
+            case 3:
+
+                star[3].setVisibility(View.VISIBLE);
+                fadein(star[3]);
+                x = x+200;
+                moveImageView(star[3], x, y, 1000);
+                setstarsize();
+                break;
+
+            case 4:
+
+                star[4].setVisibility(View.VISIBLE);
+                fadein(star[4]);
+                x = x+200;
+                moveImageView(star[4], x, y, 1000);
+                setstarsize();
+                break;
+
+            case 5:
+
+                star[5].setVisibility(View.VISIBLE);
+                fadein(star[5]);
+                x = x+200;
+                moveImageView(star[5], x, y, 1000);
+                setstarsize();
+                break;
+
+        }
+
+    }
+
+
+
                                     /*..................................................*/
 }

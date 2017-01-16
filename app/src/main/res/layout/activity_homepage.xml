@@ -111,4 +111,50 @@
                 android:layout_centerHorizontal="true" />
         </RelativeLayout>
     </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        >
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:srcCompat="@drawable/stars_png_630"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="300dp"
+            android:id="@+id/star1" />
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:srcCompat="@drawable/stars_png_630"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="300dp"
+            android:id="@+id/star2" />
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:srcCompat="@drawable/stars_png_630"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="300dp"
+            android:id="@+id/star3" />
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:srcCompat="@drawable/stars_png_630"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="300dp"
+            android:id="@+id/star4" />
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:srcCompat="@drawable/stars_png_630"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="300dp"
+            android:id="@+id/star5" />
+
+    </FrameLayout>
+
 </RelativeLayout>
