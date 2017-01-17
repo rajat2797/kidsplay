@@ -7,13 +7,20 @@
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
     android:background="@drawable/mainback"
-    tools:context="com.kidminks.xxx.image2to5.homepage"
-    >
+    tools:context="com.kidminks.xxx.image2to5.homepage" >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="#1a5c5a"
+        android:id="@+id/ratingbg"
+        android:contentDescription="rating bar" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha="0.4"
-        >
+        android:alpha="0.4" >
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,10 +39,11 @@
             android:layout_below="@+id/back1image"
             android:layout_alignParentStart="true" />
     </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="100dp"
         android:id="@+id/view_root">
     <ImageView
         android:layout_width="250dp"
@@ -46,11 +54,29 @@
         android:layout_centerHorizontal="true" />
     </RelativeLayout>
 
+    <FrameLayout
+        android:id="@+id/frame_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="125dp" >
+
+    </FrameLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true" >
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:id="@+id/ic1"
+            android:onClick="callim1"
+            android:layout_marginStart="22dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true" />
 
         <ImageView
             android:layout_width="80dp"
@@ -79,22 +105,14 @@
             android:layout_toEndOf="@+id/ic3"
             android:layout_marginStart="12dp" />
 
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:id="@+id/ic1"
-            android:onClick="callim1"
-            android:layout_marginStart="22dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true" />
     </RelativeLayout>
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ca2e2c2c"
         android:id="@+id/dancefrag"
-        android:visibility="gone"
-        >
+        android:visibility="gone" >
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">

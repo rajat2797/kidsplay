@@ -1,9 +1,14 @@
 package com.kidminks.xxx.image2to5;
 
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.Image;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Handler;
 import android.provider.CalendarContract;
 import android.speech.tts.TextToSpeech;
@@ -21,12 +26,13 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Locale;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class homepage extends AppCompatActivity {
+public class homepage extends AppCompatActivity implements colorexamples.OnFragmentInteractionListener {
 
     collection[] data;
     colourdata[] colourdatas;
@@ -43,15 +49,16 @@ public class homepage extends AppCompatActivity {
     TextToSpeech tts;
     String cname,i1cname,i2cname,i3cname,i4cname;
 
-    private ImageView back1image,back2image;
-    AnimationDrawable animationDrawable1,animationDrawable2;
+//    private ImageView back1image,back2image;
+//    AnimationDrawable animationDrawable1,animationDrawable2;
 
     private ImageView imageView,im1,im2,im3,im4,mainimage;
     private ViewGroup viewGroup;
     private int marleft,marright,martop,marbottom;
     private int xcor;
     private int ycor;
-
+    FrameLayout frame_container;
+    private colorexamples fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +71,8 @@ public class homepage extends AppCompatActivity {
         initializedances();
         initialize();
         initialisestars();
+        frame_container = (FrameLayout) findViewById(R.id.frame_container);
+        fragment = new colorexamples();
 
         tts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
@@ -75,15 +84,16 @@ public class homepage extends AppCompatActivity {
                 }
             }
         });
+        frame_container.setVisibility(View.INVISIBLE);
 
-        back1image = (ImageView)findViewById(R.id.back1image);
-        back2image = (ImageView)findViewById(R.id.back2image);
-        back1image.setBackgroundResource(R.drawable.mybackanimation1);
-        back2image.setBackgroundResource(R.drawable.mybackanimation2);
-        animationDrawable1 = (AnimationDrawable) back1image.getBackground();
-        animationDrawable2 = (AnimationDrawable) back2image.getBackground();
-        animationDrawable1.start();
-        animationDrawable2.start();
+//        back1image = (ImageView)findViewById(R.id.back1image);
+//        back2image = (ImageView)findViewById(R.id.back2image);
+//        back1image.setBackgroundResource(R.drawable.mybackanimation1);
+//        back2image.setBackgroundResource(R.drawable.mybackanimation2);
+//        animationDrawable1 = (AnimationDrawable) back1image.getBackground();
+//        animationDrawable2 = (AnimationDrawable) back2image.getBackground();
+//        animationDrawable1.start();
+//        animationDrawable2.start();
 
         displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -103,6 +113,7 @@ public class homepage extends AppCompatActivity {
         imageView.setOnTouchListener(new ChoiceTouchListner() );
     }
 
+
                                               /* for moving object */
 
     private final class ChoiceTouchListner implements View.OnTouchListener{
@@ -116,16 +127,16 @@ public class homepage extends AppCompatActivity {
             final int Y = (int)event.getRawY();
             switch (event.getAction() & MotionEvent.ACTION_MASK){
                 case MotionEvent.ACTION_DOWN:
-                    animationDrawable1.stop();
-                    animationDrawable2.stop();
+//                    animationDrawable1.stop();
+//                    animationDrawable2.stop();
                     tts.speak(cname,TextToSpeech.QUEUE_FLUSH,null,null);
                     RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams)view.getLayoutParams();
                     xcor = X-lp.leftMargin;
                     ycor = Y-lp.topMargin;
                     break;
                 case MotionEvent.ACTION_UP:
-                    animationDrawable1.start();
-                    animationDrawable2.start();
+//                    animationDrawable1.start();
+//                    animationDrawable2.start();
                     RelativeLayout.LayoutParams checkpar = (RelativeLayout.LayoutParams)view.getLayoutParams();
                     checklocation(checkpar);
                     break;
@@ -164,14 +175,30 @@ public class homepage extends AppCompatActivity {
             wincount+=1;
             appreciate();
             if( wincount==5 ) {
-                showdance();
-                wincount = 0;
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        showdance();
+                        wincount = 0;
+                    }
+                }, 2500);
+
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent = getIntent();
+                        finish();
+                        startActivity(intent);
+                    }
+                }, 7000);
+
             }
             changeimage();
             changeposition();
         }
         else{
-            /*on two wrong call rohit's functio*/
+            /*on two wrong call rohit's function*/
             if(checkpar.topMargin+250<martop){
                 tts.speak("Drag carefully",TextToSpeech.QUEUE_FLUSH,null,null);
             }
@@ -238,13 +265,28 @@ public class homepage extends AppCompatActivity {
 
 
                                                   /* onclick functions*/
-    public void callim1(View v){
+    public void callim1(View v) {
+
         FrameLayout dancefrag;
         dancefrag = (FrameLayout)findViewById(R.id.dancefrag);
         if(dancefrag.getVisibility()==View.VISIBLE){
             return;
         }
-        tts.speak(i1cname,TextToSpeech.QUEUE_FLUSH,null,null);
+        if(frame_container.getVisibility() == View.VISIBLE) {
+            frame_container.setVisibility(View.INVISIBLE);
+            getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+        }
+        else {
+            tts.speak(i1cname,TextToSpeech.QUEUE_FLUSH,null,null);
+//            Toast.makeText(homepage.this, "Landed Here", Toast.LENGTH_SHORT).show();
+            Bundle bundle = new Bundle();
+            bundle.putString("color_name", i1cname);
+
+            fragment.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.frame_container, fragment).commit();
+            frame_container.setVisibility(View.VISIBLE);
+        }
     }
     public void callim2(View v){
         FrameLayout dancefrag;
@@ -252,7 +294,21 @@ public class homepage extends AppCompatActivity {
         if(dancefrag.getVisibility()==View.VISIBLE){
             return;
         }
-        tts.speak(i2cname,TextToSpeech.QUEUE_FLUSH,null,null);
+        if(frame_container.getVisibility() == View.VISIBLE) {
+            frame_container.setVisibility(View.INVISIBLE);
+            getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+        }
+        else {
+            tts.speak(i2cname,TextToSpeech.QUEUE_FLUSH,null,null);
+//            Toast.makeText(homepage.this, "Landed Here", Toast.LENGTH_SHORT).show();
+            Bundle bundle = new Bundle();
+            bundle.putString("color_name", i2cname);
+//            colorexamples fragment = new colorexamples();
+            fragment.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.frame_container, fragment).commit();
+            frame_container.setVisibility(View.VISIBLE);
+        }
     }
     public void callim3(View v){
         FrameLayout dancefrag;
@@ -260,7 +316,21 @@ public class homepage extends AppCompatActivity {
         if(dancefrag.getVisibility()==View.VISIBLE){
             return;
         }
-        tts.speak(i3cname,TextToSpeech.QUEUE_FLUSH,null,null);
+        if(frame_container.getVisibility() == View.VISIBLE) {
+            frame_container.setVisibility(View.INVISIBLE);
+            getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+        }
+        else {
+            tts.speak(i3cname,TextToSpeech.QUEUE_FLUSH,null,null);
+//            Toast.makeText(homepage.this, "Landed Here", Toast.LENGTH_SHORT).show();
+            Bundle bundle = new Bundle();
+            bundle.putString("color_name", i3cname);
+//            colorexamples fragment = new colorexamples();
+            fragment.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.frame_container, fragment).commit();
+            frame_container.setVisibility(View.VISIBLE);
+        }
     }
     public void callim4(View v){
         FrameLayout dancefrag;
@@ -268,9 +338,29 @@ public class homepage extends AppCompatActivity {
         if(dancefrag.getVisibility()==View.VISIBLE){
             return;
         }
-        tts.speak(i4cname,TextToSpeech.QUEUE_FLUSH,null,null);
+        if(frame_container.getVisibility() == View.VISIBLE) {
+            frame_container.setVisibility(View.INVISIBLE);
+            getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+        }
+        else {
+            tts.speak(i4cname,TextToSpeech.QUEUE_FLUSH,null,null);
+//            Toast.makeText(homepage.this, "Landed Here", Toast.LENGTH_SHORT).show();
+            Bundle bundle = new Bundle();
+            bundle.putString("color_name", i4cname);
+//            colorexamples fragment = new colorexamples();
+            fragment.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.frame_container, fragment).commit();
+            frame_container.setVisibility(View.VISIBLE);
+        }
     }
-                                /*......................................................*/
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    /*......................................................*/
 
 
 
@@ -344,7 +434,8 @@ public class homepage extends AppCompatActivity {
 
 
                                                 /* Random text generatin */
-    private void appreciate(){
+    private void appreciate() {
+
         int rand = (int)(Math.random()*5)+1;
         switch (rand){
             case 1:tts.speak("Incredible",TextToSpeech.QUEUE_FLUSH,null,null);break;
@@ -477,9 +568,34 @@ public class homepage extends AppCompatActivity {
 
     }
 
+    public void r() {
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                moveImageView(star[wincount], x, y, 1000);
+                setstarsize();
+            }
+        }, 1000);
+    }
+
+    public void fade_anim() {
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                for(int i=1;i<=wincount;i++)
+                    fadein(star[i]);
+
+                handler.postDelayed(this, 1000);
+            }
+        }, 10000);
+    }
+
     private void showstar() {
 
-        y = -800;
+        y = -750;
         switch(wincount) {
 
             case 1:
@@ -487,8 +603,7 @@ public class homepage extends AppCompatActivity {
                 star[1].setVisibility(View.VISIBLE);
                 fadein(star[1]);
                 x = -410;
-                moveImageView(star[1], x, y, 1000);
-                setstarsize();
+                r();
                 break;
 
             case 2:
@@ -496,8 +611,7 @@ public class homepage extends AppCompatActivity {
                 star[2].setVisibility(View.VISIBLE);
                 fadein(star[2]);
                 x = x+200;
-                moveImageView(star[2], x, y, 1000);
-                setstarsize();
+                r();
                 break;
 
             case 3:
@@ -505,8 +619,7 @@ public class homepage extends AppCompatActivity {
                 star[3].setVisibility(View.VISIBLE);
                 fadein(star[3]);
                 x = x+200;
-                moveImageView(star[3], x, y, 1000);
-                setstarsize();
+                r();
                 break;
 
             case 4:
@@ -514,8 +627,7 @@ public class homepage extends AppCompatActivity {
                 star[4].setVisibility(View.VISIBLE);
                 fadein(star[4]);
                 x = x+200;
-                moveImageView(star[4], x, y, 1000);
-                setstarsize();
+                r();
                 break;
 
             case 5:
@@ -523,8 +635,7 @@ public class homepage extends AppCompatActivity {
                 star[5].setVisibility(View.VISIBLE);
                 fadein(star[5]);
                 x = x+200;
-                moveImageView(star[5], x, y, 1000);
-                setstarsize();
+                r();
                 break;
 
         }

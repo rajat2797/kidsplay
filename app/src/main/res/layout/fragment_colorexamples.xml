@@ -1,0 +1,42 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.kidminks.xxx.image2to5.colorexamples"
+    android:background="#7b89ca" >
+
+    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_keyboard_arrow_down_black_48dp"
+        android:id="@+id/down_arrow"/>
+
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="145dp"
+        android:src="@drawable/grey_circle"
+        android:id="@+id/color_button"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/color_name"
+        android:text="Color Name"
+        android:textSize="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="190dp" />
+
+    <ListView
+        android:id="@+id/objectslv"
+        android:transcriptMode="alwaysScroll"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginTop="55dp"
+        tools:listitem="@layout/objects" >
+
+    </ListView>
+
+</FrameLayout>
