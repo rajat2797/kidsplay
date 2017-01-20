@@ -1,38 +1,28 @@
 package com.kidminks.xxx.image2to5;
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.content.Intent;
+
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
-import android.media.Image;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Handler;
-import android.provider.CalendarContract;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Locale;
-import java.util.concurrent.locks.ReentrantLock;
 
-public class homepage extends AppCompatActivity implements colorexamples.OnFragmentInteractionListener {
+public class homepage extends AppCompatActivity{
 
     collection[] data;
     colourdata[] colourdatas;
@@ -45,20 +35,18 @@ public class homepage extends AppCompatActivity implements colorexamples.OnFragm
     float x,y;
 
     DisplayMetrics displayMetrics;
+    int width;
 
     TextToSpeech tts;
     String cname,i1cname,i2cname,i3cname,i4cname;
-
-//    private ImageView back1image,back2image;
-//    AnimationDrawable animationDrawable1,animationDrawable2;
 
     private ImageView imageView,im1,im2,im3,im4,mainimage;
     private ViewGroup viewGroup;
     private int marleft,marright,martop,marbottom;
     private int xcor;
     private int ycor;
-    FrameLayout frame_container;
-    private colorexamples fragment;
+
+    int initialx,initialy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,8 +59,6 @@ public class homepage extends AppCompatActivity implements colorexamples.OnFragm
         initializedances();
         initialize();
         initialisestars();
-        frame_container = (FrameLayout) findViewById(R.id.frame_container);
-        fragment = new colorexamples();
 
         tts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
@@ -84,17 +70,6 @@ public class homepage extends AppCompatActivity implements colorexamples.OnFragm
                 }
             }
         });
-        frame_container.setVisibility(View.INVISIBLE);
-
-//        back1image = (ImageView)findViewById(R.id.back1image);
-//        back2image = (ImageView)findViewById(R.id.back2image);
-//        back1image.setBackgroundResource(R.drawable.mybackanimation1);
-//        back2image.setBackgroundResource(R.drawable.mybackanimation2);
-//        animationDrawable1 = (AnimationDrawable) back1image.getBackground();
-//        animationDrawable2 = (AnimationDrawable) back2image.getBackground();
-//        animationDrawable1.start();
-//        animationDrawable2.start();
-
         displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
@@ -105,10 +80,11 @@ public class homepage extends AppCompatActivity implements colorexamples.OnFragm
         im2 = (ImageView)findViewById(R.id.ic2);
         im3 = (ImageView)findViewById(R.id.ic3);
         im4 = (ImageView)findViewById(R.id.ic4);
+        adjustlayout();
         findrand();
-
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(250,250);
-        layoutParams.setMarginStart(displayMetrics.widthPixels/2-200);
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(width+50,width+50);
+        layoutParams.setMarginStart( displayMetrics.widthPixels/2-(width/2)-50 );
+        layoutParams.topMargin = displayMetrics.heightPixels/2-width*2;
         imageView.setLayoutParams(layoutParams);
         imageView.setOnTouchListener(new ChoiceTouchListner() );
     }
@@ -127,16 +103,12 @@ public class homepage extends AppCompatActivity implements colorexamples.OnFragm
             final int Y = (int)event.getRawY();
             switch (event.getAction() & MotionEvent.ACTION_MASK){
                 case MotionEvent.ACTION_DOWN:
-//                    animationDrawable1.stop();
-//                    animationDrawable2.stop();
                     tts.speak(cname,TextToSpeech.QUEUE_FLUSH,null,null);
                     RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams)view.getLayoutParams();
                     xcor = X-lp.leftMargin;
                     ycor = Y-lp.topMargin;
                     break;
                 case MotionEvent.ACTION_UP:
-//                    animationDrawable1.start();
-//                    animationDrawable2.start();
                     RelativeLayout.LayoutParams checkpar = (RelativeLayout.LayoutParams)view.getLayoutParams();
                     checklocation(checkpar);
                     break;
@@ -168,8 +140,8 @@ public class homepage extends AppCompatActivity implements colorexamples.OnFragm
             setMarginOfViews(mainimage);
             flag = true;
         }
-        if( (checkpar.topMargin+250>=martop&&checkpar.topMargin+250<=marbottom)
-                &&(checkpar.leftMargin+125>=marleft&&checkpar.leftMargin+125<=marright)
+        if( (checkpar.topMargin+(width/2)>=martop&&checkpar.topMargin+(width/2)<=marbottom)
+                &&(checkpar.leftMargin+(width/2)>=marleft&&checkpar.leftMargin+(width/2)<=marright)
                 ){
             flag=false;
             wincount+=1;
@@ -182,17 +154,7 @@ public class homepage extends AppCompatActivity implements colorexamples.OnFragm
                         showdance();
                         wincount = 0;
                     }
-                }, 2500);
-
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Intent intent = getIntent();
-                        finish();
-                        startActivity(intent);
-                    }
-                }, 7000);
-
+                }, 1500);
             }
             changeimage();
             changeposition();
@@ -216,8 +178,9 @@ public class homepage extends AppCompatActivity implements colorexamples.OnFragm
 
     /* reverting to initial position */
     private void changeposition(){
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(250,250);
-        layoutParams.setMarginStart(displayMetrics.widthPixels/2-200);
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(width+50,width+50);
+        layoutParams.setMarginStart( displayMetrics.widthPixels/2-(width/2)-50 );
+        layoutParams.topMargin = displayMetrics.heightPixels/2-width*2;
         imageView.setLayoutParams(layoutParams);
     }
     /* to show dance*/
@@ -252,12 +215,21 @@ public class homepage extends AppCompatActivity implements colorexamples.OnFragm
         Handler h =new Handler();
         h.postDelayed(r,6000);
 
+        star[1].setX(initialx);
+        star[1].setY(initialy);
         star[1].setVisibility(View.INVISIBLE);
+        star[2].setX(initialx);
+        star[2].setY(initialy);
         star[2].setVisibility(View.INVISIBLE);
+        star[3].setX(initialx);
+        star[3].setY(initialy);
         star[3].setVisibility(View.INVISIBLE);
+        star[4].setX(initialx);
+        star[4].setY(initialy);
         star[4].setVisibility(View.INVISIBLE);
+        star[5].setX(initialx);
+        star[5].setY(initialy);
         star[5].setVisibility(View.INVISIBLE);
-
     }
 
                                 /*.....................................................*/
@@ -272,20 +244,8 @@ public class homepage extends AppCompatActivity implements colorexamples.OnFragm
         if(dancefrag.getVisibility()==View.VISIBLE){
             return;
         }
-        if(frame_container.getVisibility() == View.VISIBLE) {
-            frame_container.setVisibility(View.INVISIBLE);
-            getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-        }
         else {
             tts.speak(i1cname,TextToSpeech.QUEUE_FLUSH,null,null);
-//            Toast.makeText(homepage.this, "Landed Here", Toast.LENGTH_SHORT).show();
-            Bundle bundle = new Bundle();
-            bundle.putString("color_name", i1cname);
-
-            fragment.setArguments(bundle);
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.frame_container, fragment).commit();
-            frame_container.setVisibility(View.VISIBLE);
         }
     }
     public void callim2(View v){
@@ -294,20 +254,8 @@ public class homepage extends AppCompatActivity implements colorexamples.OnFragm
         if(dancefrag.getVisibility()==View.VISIBLE){
             return;
         }
-        if(frame_container.getVisibility() == View.VISIBLE) {
-            frame_container.setVisibility(View.INVISIBLE);
-            getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-        }
         else {
             tts.speak(i2cname,TextToSpeech.QUEUE_FLUSH,null,null);
-//            Toast.makeText(homepage.this, "Landed Here", Toast.LENGTH_SHORT).show();
-            Bundle bundle = new Bundle();
-            bundle.putString("color_name", i2cname);
-//            colorexamples fragment = new colorexamples();
-            fragment.setArguments(bundle);
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.frame_container, fragment).commit();
-            frame_container.setVisibility(View.VISIBLE);
         }
     }
     public void callim3(View v){
@@ -316,20 +264,8 @@ public class homepage extends AppCompatActivity implements colorexamples.OnFragm
         if(dancefrag.getVisibility()==View.VISIBLE){
             return;
         }
-        if(frame_container.getVisibility() == View.VISIBLE) {
-            frame_container.setVisibility(View.INVISIBLE);
-            getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-        }
         else {
             tts.speak(i3cname,TextToSpeech.QUEUE_FLUSH,null,null);
-//            Toast.makeText(homepage.this, "Landed Here", Toast.LENGTH_SHORT).show();
-            Bundle bundle = new Bundle();
-            bundle.putString("color_name", i3cname);
-//            colorexamples fragment = new colorexamples();
-            fragment.setArguments(bundle);
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.frame_container, fragment).commit();
-            frame_container.setVisibility(View.VISIBLE);
         }
     }
     public void callim4(View v){
@@ -338,42 +274,23 @@ public class homepage extends AppCompatActivity implements colorexamples.OnFragm
         if(dancefrag.getVisibility()==View.VISIBLE){
             return;
         }
-        if(frame_container.getVisibility() == View.VISIBLE) {
-            frame_container.setVisibility(View.INVISIBLE);
-            getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-        }
         else {
             tts.speak(i4cname,TextToSpeech.QUEUE_FLUSH,null,null);
-//            Toast.makeText(homepage.this, "Landed Here", Toast.LENGTH_SHORT).show();
-            Bundle bundle = new Bundle();
-            bundle.putString("color_name", i4cname);
-//            colorexamples fragment = new colorexamples();
-            fragment.setArguments(bundle);
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.frame_container, fragment).commit();
-            frame_container.setVisibility(View.VISIBLE);
         }
     }
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
-
-    /*......................................................*/
+                                    /*......................................................*/
 
 
 
                                                   /* data initialization */
     /*getting layout margin of correct colour */
-
     private void setMarginOfViews(ImageView mainimage){
         marleft = (int)mainimage.getX();
         martop = (int)mainimage.getY();
         marright = marleft + mainimage.getWidth();
         marbottom = martop + mainimage.getHeight();
     }
-
     /*initializing image data .................... only once */
     private void initialize(){
         for( int i=1;i<=dataavailable;i++ ){
@@ -411,8 +328,7 @@ public class homepage extends AppCompatActivity implements colorexamples.OnFragm
         letsdance[5]="mycartoonanimation5";
         letsdance[6]="mycartoonanimation6";
     }
-
-//    initialising stars
+   /*initialising stars .......................... only once */
     private void initialisestars() {
         star = new ImageView[6];
         star[1] = (ImageView) findViewById(R.id.star1);
@@ -430,6 +346,28 @@ public class homepage extends AppCompatActivity implements colorexamples.OnFragm
     }
 
 
+                                        /*.................................................*/
+                                                    /* Layout Adjusting */
+    private void adjustlayout(){
+        width = (displayMetrics.widthPixels-110)/4;
+        /* taking a square box ==> width = height */
+        ViewGroup.MarginLayoutParams marginLayoutParams;
+        marginLayoutParams = (ViewGroup.MarginLayoutParams) im1.getLayoutParams();
+        marginLayoutParams.setMarginStart(20);
+        im1.getLayoutParams().width=width;im1.getLayoutParams().height=width;
+        marginLayoutParams = (ViewGroup.MarginLayoutParams) im2.getLayoutParams();
+        marginLayoutParams.setMarginStart(10);
+        im2.getLayoutParams().width=width;im2.getLayoutParams().height=width;
+        marginLayoutParams = (ViewGroup.MarginLayoutParams) im3.getLayoutParams();
+        marginLayoutParams.setMarginStart(10);
+        im3.getLayoutParams().width=width;im3.getLayoutParams().height=width;
+        marginLayoutParams = (ViewGroup.MarginLayoutParams) im4.getLayoutParams();
+        marginLayoutParams.setMarginStart(10);
+        im4.getLayoutParams().width=width;im4.getLayoutParams().height=width;
+
+        ImageView rating = (ImageView)findViewById(R.id.ratingbg);
+        rating.getLayoutParams().height = displayMetrics.widthPixels/5;
+    }
                                         /*.................................................*/
 
 
@@ -483,7 +421,7 @@ public class homepage extends AppCompatActivity implements colorexamples.OnFragm
 
 
 
-    /* randomizing all, image and box colours */
+                                    /* randomizing all, image and box colours */
 
     private void findrand(){
         int id = (int)(Math.random()*dataavailable)+1;
@@ -538,8 +476,9 @@ public class homepage extends AppCompatActivity implements colorexamples.OnFragm
             }
         }
     }
+                                /*....................................*/
 
-//    Animatioins
+                                            /* Animatioins */
 
     public void fadein(View view) {
 
@@ -551,7 +490,6 @@ public class homepage extends AppCompatActivity implements colorexamples.OnFragm
 
         Animation rotate_anim = AnimationUtils.loadAnimation(this, R.anim.rotation);
         view.setAnimation(rotate_anim);
-
         view.animate()
                 .setInterpolator(new AccelerateDecelerateInterpolator())
                 .translationX(toX)
@@ -560,82 +498,65 @@ public class homepage extends AppCompatActivity implements colorexamples.OnFragm
     }
 
     public void setstarsize() {
-
         ViewGroup.LayoutParams sizerules = star[wincount].getLayoutParams();
-        sizerules.width = 200;
-        sizerules.height = 220;
+        sizerules.width = (displayMetrics.widthPixels-20)/5;
+        sizerules.height = (displayMetrics.widthPixels-20)/5;
         star[wincount].setLayoutParams(sizerules);
-
-    }
-
-    public void r() {
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                moveImageView(star[wincount], x, y, 1000);
-                setstarsize();
-            }
-        }, 1000);
-    }
-
-    public void fade_anim() {
-
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                for(int i=1;i<=wincount;i++)
-                    fadein(star[i]);
-
-                handler.postDelayed(this, 1000);
-            }
-        }, 10000);
     }
 
     private void showstar() {
-
-        y = -750;
+        ImageView imageView;
         switch(wincount) {
-
             case 1:
-
                 star[1].setVisibility(View.VISIBLE);
                 fadein(star[1]);
-                x = -410;
-                r();
+                imageView = (ImageView)findViewById(R.id.star1);
+                initialx = (int)imageView.getX();
+                initialy = (int)imageView.getY();
+                y = -imageView.getY();
+                x = -imageView.getX()-(displayMetrics.widthPixels/5)/2;
+                moveImageView(star[wincount], x, y, 1000);
+                setstarsize();
                 break;
 
             case 2:
-
                 star[2].setVisibility(View.VISIBLE);
                 fadein(star[2]);
-                x = x+200;
-                r();
+                imageView = (ImageView)findViewById(R.id.star2);
+                y = -imageView.getY();
+                x = x+displayMetrics.widthPixels/5-5;
+                moveImageView(star[wincount], x, y, 1000);
+                setstarsize();
                 break;
 
             case 3:
-
                 star[3].setVisibility(View.VISIBLE);
                 fadein(star[3]);
-                x = x+200;
-                r();
+                imageView = (ImageView)findViewById(R.id.star3);
+                y = -imageView.getY();
+                x = x+displayMetrics.widthPixels/5-5;
+                moveImageView(star[wincount], x, y, 1000);
+                setstarsize();
                 break;
 
             case 4:
-
                 star[4].setVisibility(View.VISIBLE);
                 fadein(star[4]);
-                x = x+200;
-                r();
+                imageView = (ImageView)findViewById(R.id.star4);
+                y = -imageView.getY();
+                x = x+displayMetrics.widthPixels/5-5;
+                moveImageView(star[wincount], x, y, 1000);
+                setstarsize();
                 break;
 
             case 5:
-
                 star[5].setVisibility(View.VISIBLE);
                 fadein(star[5]);
-                x = x+200;
-                r();
+                imageView = (ImageView)findViewById(R.id.star5);
+                y = -imageView.getY();
+                x = x+displayMetrics.widthPixels/5-5;
+                moveImageView(star[wincount], x, y, 1000);
+                setstarsize();
                 break;
 
         }
