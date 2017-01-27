@@ -1,9 +1,11 @@
 package com.kidminks.xxx.image2to5;
 
 
+import android.annotation.TargetApi;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import java.util.HashMap;
 import java.util.Locale;
 
 public class homepage extends AppCompatActivity{
@@ -103,7 +106,7 @@ public class homepage extends AppCompatActivity{
             final int Y = (int)event.getRawY();
             switch (event.getAction() & MotionEvent.ACTION_MASK){
                 case MotionEvent.ACTION_DOWN:
-                    tts.speak(cname,TextToSpeech.QUEUE_FLUSH,null,null);
+                    speak(cname);
                     RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams)view.getLayoutParams();
                     xcor = X-lp.leftMargin;
                     ycor = Y-lp.topMargin;
@@ -162,7 +165,7 @@ public class homepage extends AppCompatActivity{
         else{
             /*on two wrong call rohit's function*/
             if(checkpar.topMargin+250<martop){
-                tts.speak("Drag carefully",TextToSpeech.QUEUE_FLUSH,null,null);
+                speak("Drag carefully");
             }
             else{
                 tryitagain();
@@ -193,7 +196,6 @@ public class homepage extends AppCompatActivity{
         final MediaPlayer clap = MediaPlayer.create(this,R.raw.applause);
         clap.start();
         dancefrag.setVisibility(View.VISIBLE);
-        dancefrag.setZ(1000);
         ImageView imageView = (ImageView)findViewById(R.id.artimage);
         String name = letsdance[(int)(Math.random()*6)+1];
         int id = getResources().getIdentifier(name,"drawable",getPackageName());
@@ -245,7 +247,7 @@ public class homepage extends AppCompatActivity{
             return;
         }
         else {
-            tts.speak(i1cname,TextToSpeech.QUEUE_FLUSH,null,null);
+            speak(i1cname);
         }
     }
     public void callim2(View v){
@@ -255,7 +257,7 @@ public class homepage extends AppCompatActivity{
             return;
         }
         else {
-            tts.speak(i2cname,TextToSpeech.QUEUE_FLUSH,null,null);
+            speak(i2cname);
         }
     }
     public void callim3(View v){
@@ -265,7 +267,7 @@ public class homepage extends AppCompatActivity{
             return;
         }
         else {
-            tts.speak(i3cname,TextToSpeech.QUEUE_FLUSH,null,null);
+            speak(i3cname);
         }
     }
     public void callim4(View v){
@@ -275,7 +277,7 @@ public class homepage extends AppCompatActivity{
             return;
         }
         else {
-            tts.speak(i4cname,TextToSpeech.QUEUE_FLUSH,null,null);
+            speak(i4cname);
         }
     }
 
@@ -376,11 +378,11 @@ public class homepage extends AppCompatActivity{
 
         int rand = (int)(Math.random()*5)+1;
         switch (rand){
-            case 1:tts.speak("Incredible",TextToSpeech.QUEUE_FLUSH,null,null);break;
-            case 2:tts.speak("Good",TextToSpeech.QUEUE_FLUSH,null,null);break;
-            case 3:tts.speak("Nice",TextToSpeech.QUEUE_FLUSH,null,null);break;
-            case 4:tts.speak("Awesome",TextToSpeech.QUEUE_FLUSH,null,null);break;
-            case 5:tts.speak("Outstanding",TextToSpeech.QUEUE_FLUSH,null,null);break;
+            case 1:speak("Incredible");break;
+            case 2:speak("Good");break;
+            case 3:speak("Nice");break;
+            case 4:speak("Awesome");break;
+            case 5:speak("Outstanding");break;
         }
 
         showstar();
@@ -389,11 +391,11 @@ public class homepage extends AppCompatActivity{
     private void tryitagain(){
         int rand = (int)(Math.random()*5)+1;
         switch (rand){
-            case 1:tts.speak("Not correct",TextToSpeech.QUEUE_FLUSH,null,null);break;
-            case 2:tts.speak("Wrong",TextToSpeech.QUEUE_FLUSH,null,null);break;
-            case 3:tts.speak("Try Again",TextToSpeech.QUEUE_FLUSH,null,null);break;
-            case 4:tts.speak("Nice Try",TextToSpeech.QUEUE_FLUSH,null,null);break;
-            case 5:tts.speak("sorry it is "+cname,TextToSpeech.QUEUE_FLUSH,null,null);break;
+            case 1:speak("Not correct");break;
+            case 2:speak("Wrong");break;
+            case 3:speak("Try Again");break;
+            case 4:speak("Nice Try");break;
+            case 5:speak("sorry it is "+cname);break;
         }
     }
 
@@ -566,4 +568,25 @@ public class homepage extends AppCompatActivity{
 
 
                                     /*..................................................*/
+
+
+    private void speak( String text){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            ttsGreater21(text);
+        } else {
+            ttsUnder20(text);
+        }
+    }
+    @SuppressWarnings("deprecation")
+    private void ttsUnder20(String text) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "MessageId");
+        tts.speak(text, TextToSpeech.QUEUE_FLUSH, map);
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private void ttsGreater21(String text) {
+        String utteranceId=this.hashCode() + "";
+        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, utteranceId);
+    }
 }
