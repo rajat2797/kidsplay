@@ -11,7 +11,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="120dp"
         android:background="#1a5c5a"
         android:id="@+id/ratingbg"
         android:contentDescription="rating bar" />
@@ -139,5 +139,12 @@
             android:id="@+id/star5" />
 
     </FrameLayout>
+
+    <ImageView
+        android:id="@+id/hand"
+        android:src="@drawable/hand"
+        android:padding="0dp"
+        android:layout_width="100sp"
+        android:layout_height="100sp" />
 
 </RelativeLayout>

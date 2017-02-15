@@ -11,12 +11,16 @@ import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -24,6 +28,7 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.concurrent.RunnableFuture;
 
 public class homepage extends AppCompatActivity{
 
@@ -33,7 +38,7 @@ public class homepage extends AppCompatActivity{
     private boolean flag;
     int wincount = 0;
     private final int dataavailable = 5;
-
+    private int try_count = 0;
     ImageView[] star;
     float x,y;
 
@@ -43,7 +48,7 @@ public class homepage extends AppCompatActivity{
     TextToSpeech tts;
     String cname,i1cname,i2cname,i3cname,i4cname;
 
-    private ImageView imageView,im1,im2,im3,im4,mainimage;
+    private ImageView imageView,im1,im2,im3,im4,mainimage,hand;
     private ViewGroup viewGroup;
     private int marleft,marright,martop,marbottom;
     private int xcor;
@@ -83,6 +88,7 @@ public class homepage extends AppCompatActivity{
         im2 = (ImageView)findViewById(R.id.ic2);
         im3 = (ImageView)findViewById(R.id.ic3);
         im4 = (ImageView)findViewById(R.id.ic4);
+        hand = (ImageView) findViewById(R.id.hand);
         adjustlayout();
         findrand();
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(width+50,width+50);
@@ -138,7 +144,7 @@ public class homepage extends AppCompatActivity{
                                             /* Check for win or loose */
     /* checking win */
 
-    private void checklocation(RelativeLayout.LayoutParams checkpar){
+    private void checklocation(final RelativeLayout.LayoutParams checkpar){
         if( flag==false ){
             setMarginOfViews(mainimage);
             flag = true;
@@ -147,6 +153,7 @@ public class homepage extends AppCompatActivity{
                 &&(checkpar.leftMargin+(width/2)>=marleft&&checkpar.leftMargin+(width/2)<=marright)
                 ){
             flag=false;
+            try_count = 0;
             wincount+=1;
             appreciate();
             if( wincount==5 ) {
@@ -156,22 +163,70 @@ public class homepage extends AppCompatActivity{
                     public void run() {
                         showdance();
                         wincount = 0;
+                        changeimage();
+                        changeposition();
                     }
-                }, 1500);
+                }, 2300);
             }
-            changeimage();
-            changeposition();
+            if( wincount!=5 ) {
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        changeimage();
+                        changeposition();
+                    }
+                }, 2300);
+            }
         }
         else{
-            /*on two wrong call rohit's function*/
+
             if(checkpar.topMargin+250<martop){
                 speak("Drag carefully");
             }
             else{
+                try_count = try_count + 1;
+                if(try_count >= 2) {
+                    guide();
+                }
                 tryitagain();
             }
             changeposition();
+
         }
+    }
+
+    private void guide() {
+
+        Handler handler = new Handler();
+        Runnable r1 = new Runnable() {
+            @Override
+            public void run() {
+                fadein(hand);
+                hand.setVisibility(View.VISIBLE);
+                hand.setX(imageView.getX());
+                hand.setY(imageView.getY());
+            }
+        };
+        Runnable r2 = new Runnable() {
+            @Override
+            public void run() {
+                hand.animate()
+                        .setDuration(3000)
+                        .translationX(mainimage.getX())
+                        .translationY(mainimage.getY());
+            }
+        };
+        Runnable r3 = new Runnable() {
+            @Override
+            public void run() {
+                fadeout(hand);
+                hand.setVisibility(View.INVISIBLE);
+            }
+        };
+        handler.postDelayed(r1, 1000);
+        handler.postDelayed(r2, 2000);
+        handler.postDelayed(r3, 4800);
     }
 
     /* changing things when won */
@@ -483,9 +538,13 @@ public class homepage extends AppCompatActivity{
                                             /* Animatioins */
 
     public void fadein(View view) {
-
         Animation fade_in = AnimationUtils.loadAnimation(this, R.anim.fade_in);
         view.setAnimation(fade_in);
+    }
+
+    private void fadeout(View view) {
+        Animation fade_out = AnimationUtils.loadAnimation(this, R.anim.fade_out);
+        view.setAnimation(fade_out);
     }
 
     public void moveImageView(View view, float toX, float toY, int duration) {
@@ -508,27 +567,39 @@ public class homepage extends AppCompatActivity{
 
     private void showstar() {
         ImageView imageView;
+        Handler handler = new Handler();
         switch(wincount) {
             case 1:
-                star[1].setVisibility(View.VISIBLE);
-                fadein(star[1]);
                 imageView = (ImageView)findViewById(R.id.star1);
                 initialx = (int)imageView.getX();
                 initialy = (int)imageView.getY();
                 y = -imageView.getY();
                 x = -imageView.getX()-(displayMetrics.widthPixels/5)/2;
-                moveImageView(star[wincount], x, y, 1000);
-                setstarsize();
+                star[1].setVisibility(View.VISIBLE);
+                fadein(star[1]);
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        moveImageView(star[wincount], x, y, 1000);
+                        setstarsize();
+                    }
+                }, 1500);
+
                 break;
 
             case 2:
-                star[2].setVisibility(View.VISIBLE);
-                fadein(star[2]);
                 imageView = (ImageView)findViewById(R.id.star2);
                 y = -imageView.getY();
                 x = x+displayMetrics.widthPixels/5-5;
-                moveImageView(star[wincount], x, y, 1000);
-                setstarsize();
+                star[2].setVisibility(View.VISIBLE);
+                fadein(star[2]);
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        moveImageView(star[wincount], x, y, 1000);
+                        setstarsize();
+                    }
+                }, 1500);
                 break;
 
             case 3:
@@ -537,8 +608,13 @@ public class homepage extends AppCompatActivity{
                 imageView = (ImageView)findViewById(R.id.star3);
                 y = -imageView.getY();
                 x = x+displayMetrics.widthPixels/5-5;
-                moveImageView(star[wincount], x, y, 1000);
-                setstarsize();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        moveImageView(star[wincount], x, y, 1000);
+                        setstarsize();
+                    }
+                }, 1500);
                 break;
 
             case 4:
@@ -547,8 +623,13 @@ public class homepage extends AppCompatActivity{
                 imageView = (ImageView)findViewById(R.id.star4);
                 y = -imageView.getY();
                 x = x+displayMetrics.widthPixels/5-5;
-                moveImageView(star[wincount], x, y, 1000);
-                setstarsize();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        moveImageView(star[wincount], x, y, 1000);
+                        setstarsize();
+                    }
+                }, 1500);
                 break;
 
             case 5:
@@ -557,17 +638,50 @@ public class homepage extends AppCompatActivity{
                 imageView = (ImageView)findViewById(R.id.star5);
                 y = -imageView.getY();
                 x = x+displayMetrics.widthPixels/5-5;
-                moveImageView(star[wincount], x, y, 1000);
-                setstarsize();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        moveImageView(star[wincount], x, y, 1000);
+                        setstarsize();
+                    }
+                }, 1500);
+
                 break;
 
         }
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        hand.setVisibility(View.INVISIBLE);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 
-                                    /*..................................................*/
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
 
     private void speak( String text){
