@@ -35,7 +35,7 @@ public class homepage extends AppCompatActivity{
     collection[] data;
     colourdata[] colourdatas;
     String[] letsdance;
-    private boolean flag;
+    private boolean reflag;
     int wincount = 0;
     private final int dataavailable = 5;
     private int try_count = 0;
@@ -53,6 +53,7 @@ public class homepage extends AppCompatActivity{
     private int marleft,marright,martop,marbottom;
     private int xcor;
     private int ycor;
+    private boolean flag;
 
     int initialx,initialy;
 
@@ -88,6 +89,7 @@ public class homepage extends AppCompatActivity{
         im2 = (ImageView)findViewById(R.id.ic2);
         im3 = (ImageView)findViewById(R.id.ic3);
         im4 = (ImageView)findViewById(R.id.ic4);
+        reflag = false;
         hand = (ImageView) findViewById(R.id.hand);
         adjustlayout();
         findrand();
@@ -607,9 +609,12 @@ public class homepage extends AppCompatActivity{
         switch(wincount) {
             case 1:
                 imageView = (ImageView)findViewById(R.id.star1);
-                initialx = displayMetrics.widthPixels/2-300;
-                initialy = displayMetrics.heightPixels/2-300;
-                repositionstarts();
+                if (reflag)
+                    repositionstarts();
+                else
+                    reflag = true;
+                initialx = (int) imageView.getX();
+                initialy = (int) imageView.getY();
                 y = -imageView.getY();
                 x = -imageView.getX()-(displayMetrics.widthPixels/5)/2;
                 star[1].setVisibility(View.VISIBLE);
