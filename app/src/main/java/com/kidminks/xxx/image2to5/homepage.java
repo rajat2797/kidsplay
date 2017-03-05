@@ -41,6 +41,8 @@ public class homepage extends AppCompatActivity{
     private int try_count = 0;
     ImageView[] star;
     float x,y;
+    private float starheight,starwidth;
+
 
     DisplayMetrics displayMetrics;
     int width;
@@ -276,36 +278,36 @@ public class homepage extends AppCompatActivity{
         repositionstarts();
     }
     void repositionstarts(){
-        star[1].getLayoutParams().height = 600;
-        star[1].getLayoutParams().width = 600;
+        star[1].getLayoutParams().height = (int)starheight;
+        star[1].getLayoutParams().width = (int)starwidth;
         star[1].requestLayout();
         star[1].setX(initialx);
         star[1].setY(initialy);
         star[1].setVisibility(View.INVISIBLE);
 
-        star[2].getLayoutParams().height = 600;
-        star[2].getLayoutParams().width = 600;
+        star[2].getLayoutParams().height = (int)starheight;
+        star[2].getLayoutParams().width = (int)starwidth;
         star[2].requestLayout();
         star[2].setX(initialx);
         star[2].setY(initialy);
         star[2].setVisibility(View.INVISIBLE);
 
-        star[3].getLayoutParams().height = 600;
-        star[3].getLayoutParams().width = 600;
+        star[3].getLayoutParams().height = (int)starheight;
+        star[3].getLayoutParams().width = (int)starwidth;
         star[3].requestLayout();
         star[3].setX(initialx);
         star[3].setY(initialy);
         star[3].setVisibility(View.INVISIBLE);
 
-        star[4].getLayoutParams().height = 600;
-        star[4].getLayoutParams().width = 600;
+        star[4].getLayoutParams().height = (int)starheight;
+        star[4].getLayoutParams().width = (int)starwidth;
         star[4].requestLayout();
         star[4].setX(initialx);
         star[4].setY(initialy);
         star[4].setVisibility(View.INVISIBLE);
 
-        star[5].getLayoutParams().height = 600;
-        star[5].getLayoutParams().width = 600;
+        star[5].getLayoutParams().height = (int)starheight;
+        star[5].getLayoutParams().width = (int)starwidth;
         star[5].requestLayout();
         star[5].setX(initialx);
         star[5].setY(initialy);
@@ -412,32 +414,16 @@ public class homepage extends AppCompatActivity{
     private void initialisestars() {
         star = new ImageView[6];
         star[1] = (ImageView) findViewById(R.id.star1);
-        star[1].getLayoutParams().height = 600;
-        star[1].getLayoutParams().width = 600;
-        star[1].requestLayout();
         star[2] = (ImageView) findViewById(R.id.star2);
-        star[2].getLayoutParams().height = 600;
-        star[2].getLayoutParams().width = 600;
-        star[2].requestLayout();
         star[3] = (ImageView) findViewById(R.id.star3);
-        star[3].getLayoutParams().height = 600;
-        star[3].getLayoutParams().width = 600;
-        star[3].requestLayout();
         star[4] = (ImageView) findViewById(R.id.star4);
-        star[4].getLayoutParams().height = 600;
-        star[4].getLayoutParams().width = 600;
-        star[4].requestLayout();
         star[5] = (ImageView) findViewById(R.id.star5);
-        star[5].getLayoutParams().height = 600;
-        star[5].getLayoutParams().width = 600;
-        star[5].requestLayout();
 
         star[1].setVisibility(View.INVISIBLE);
         star[2].setVisibility(View.INVISIBLE);
         star[3].setVisibility(View.INVISIBLE);
         star[4].setVisibility(View.INVISIBLE);
         star[5].setVisibility(View.INVISIBLE);
-
     }
 
 
@@ -611,12 +597,15 @@ public class homepage extends AppCompatActivity{
                 imageView = (ImageView)findViewById(R.id.star1);
                 if (reflag)
                     repositionstarts();
-                else
+                else {
+                    starheight = star[1].getHeight();
+                    starwidth = star[1].getWidth();
                     reflag = true;
+                }
                 initialx = (int) imageView.getX();
                 initialy = (int) imageView.getY();
                 y = -imageView.getY();
-                x = -imageView.getX()-(displayMetrics.widthPixels/5)/2;
+                x = -imageView.getX()-displayMetrics.widthPixels/10;
                 star[1].setVisibility(View.VISIBLE);
                 fadein(star[1]);
                 handler.postDelayed(new Runnable() {
