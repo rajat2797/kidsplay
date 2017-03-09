@@ -42,6 +42,7 @@ public class homepage extends AppCompatActivity{
     ImageView[] star;
     float x,y;
     private float starheight,starwidth;
+    private boolean f=false;
 
 
     DisplayMetrics displayMetrics;
@@ -112,6 +113,7 @@ public class homepage extends AppCompatActivity{
             if(dancefrag.getVisibility()==View.VISIBLE){
                 return false;
             }
+
             final int X = (int)event.getRawX();
             final int Y = (int)event.getRawY();
             switch (event.getAction() & MotionEvent.ACTION_MASK){
@@ -202,6 +204,13 @@ public class homepage extends AppCompatActivity{
 
     private void guide() {
 
+        final FrameLayout dancefrag;
+        dancefrag = (FrameLayout)findViewById(R.id.dancefrag);
+        dancefrag.setVisibility(View.VISIBLE);
+        dancefrag.setBackgroundColor(Color.TRANSPARENT);
+        ImageView danceimage = (ImageView)findViewById(R.id.artimage);
+        danceimage.setBackgroundColor(Color.TRANSPARENT);
+
         Handler handler = new Handler();
         Runnable r1 = new Runnable() {
             @Override
@@ -226,11 +235,14 @@ public class homepage extends AppCompatActivity{
             public void run() {
                 fadeout(hand);
                 hand.setVisibility(View.INVISIBLE);
+                dancefrag.setVisibility(View.INVISIBLE);
+                dancefrag.setBackgroundColor(Color.parseColor("#ca2e2c2c"));
             }
         };
         handler.postDelayed(r1, 1000);
         handler.postDelayed(r2, 2000);
         handler.postDelayed(r3, 4800);
+
     }
 
     /* changing things when won */
