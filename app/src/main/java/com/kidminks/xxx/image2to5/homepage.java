@@ -2,6 +2,8 @@ package com.kidminks.xxx.image2to5;
 
 
 import android.annotation.TargetApi;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
@@ -32,6 +34,7 @@ import java.util.concurrent.RunnableFuture;
 
 public class homepage extends AppCompatActivity{
 
+    private static final int INSTRUCTIONS = 500;
     collection[] data;
     colourdata[] colourdatas;
     String[] letsdance;
@@ -64,6 +67,13 @@ public class homepage extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
+
+//        SharedPreferences preferences = getSharedPreferences("prefs", 0);
+//        boolean first = preferences.getBoolean("first", true);
+//        if(first){
+//            startActivityForResult(new Intent(this, IntroActivity.class),INSTRUCTIONS);
+//        }
+
         data = new collection[100];
         colourdatas = new colourdata[20];
         letsdance = new String[7];
@@ -77,6 +87,8 @@ public class homepage extends AppCompatActivity{
             public void onInit(int i) {
                 if( i==TextToSpeech.SUCCESS ){
                     tts.setLanguage(new Locale("en","IN"));
+                    tts.setPitch(1.30f);
+                    tts.setSpeechRate(0.70f);
                 }else{
                     Toast.makeText(homepage.this,"Sorry Bro",Toast.LENGTH_SHORT).show();
                 }
@@ -116,6 +128,13 @@ public class homepage extends AppCompatActivity{
 
             final int X = (int)event.getRawX();
             final int Y = (int)event.getRawY();
+            Log.d("Line 119 x = ", "" + X);
+            Log.d("Line 120 y = ", "" + Y);
+            if(X>=mainimage.getX() && X<=mainimage.getX() + mainimage.getWidth() &&
+                    Y>=mainimage.getY() && Y<=mainimage.getY() + mainimage.getHeight()){
+//                Toast.makeText(getApplicationContext(), "Correct Answer", Toast.LENGTH_SHORT).show();
+//                correct_while_dragging();
+            }
             switch (event.getAction() & MotionEvent.ACTION_MASK){
                 case MotionEvent.ACTION_DOWN:
                     speak(cname);
@@ -144,7 +163,45 @@ public class homepage extends AppCompatActivity{
     }
                                     /*............................................*/
 
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        if(requestCode == INSTRUCTIONS){
+//            SharedPreferences settings = getSharedPreferences("prefs", 0);
+//            SharedPreferences.Editor editor = settings.edit();
+//            editor.putBoolean("first", false);
+//            editor.commit();
+//            Toast.makeText(this ,"" + settings.getBoolean("first", true), Toast.LENGTH_SHORT).show();
+//        }
+//    }
 
+    private void correct_while_dragging(){
+        flag=false;
+        try_count = 0;
+        wincount+=1;
+        appreciate();
+        if( wincount==5 ) {
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    showdance();
+                    wincount = 0;
+                    changeimage();
+                    changeposition();
+                }
+            }, 2300);
+        }
+        else{
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    changeimage();
+                    changeposition();
+                }
+            }, 2300);
+        }
+    }
 
 
                                             /* Check for win or loose */
@@ -172,7 +229,7 @@ public class homepage extends AppCompatActivity{
                         changeimage();
                         changeposition();
                     }
-                }, 2300);
+                }, 2800);
             }
             else{
                 Handler handler = new Handler();
@@ -482,7 +539,7 @@ public class homepage extends AppCompatActivity{
     private void tryitagain(){
         int rand = (int)(Math.random()*5)+1;
         switch (rand){
-            case 1:speak("Not correct");break;
+            case 1:speak("Incorrect");break;
             case 2:speak("Wrong");break;
             case 3:speak("Try Again");break;
             case 4:speak("Nice Try");break;
