@@ -453,6 +453,19 @@ public class homepage extends AppCompatActivity{
         data[3].name="a3";data[3].color="#1e90ff";data[3].colorname="Blue";
         data[4].name="a4";data[4].color="#fa7305";data[4].colorname="Orange";
         data[5].name="a5";data[5].color="#ffff00";data[5].colorname="Yellow";
+
+        data[6].name="a6";data[6].color="#553426";data[6].colorname="Brown";
+        data[7].name="a7";data[7].color="#553426";data[7].colorname="Brown";
+        data[10].name="a10";data[10].color="#553426";data[10].colorname="Brown";
+        data[12].name="a12";data[12].color="#553426";data[11].colorname="Brown";
+        data[14].name="a14";data[14].color="#553426";data[14].colorname="Brown";
+
+        data[8].name="a8";data[8].color="#030303";data[8].colorname="Black";
+        data[11].name="a11";data[11].color="#030303";data[11].colorname="Black";
+        data[13].name="a13";data[13].color="#030303";data[13].colorname="Black";
+        data[15].name="a15";data[15].color="#030303";data[15].colorname="Black";
+        data[20].name="a20";data[20].color="#030303";data[20].colorname="Black";
+
     }
     /*initialization colour .................... only once */
     private void initializecolor(){
