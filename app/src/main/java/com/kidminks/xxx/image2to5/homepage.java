@@ -467,6 +467,11 @@ public class homepage extends AppCompatActivity{
         data[48].name="a48";data[48].color="#1e90ff";data[48].colorname="Blue";
 
         data[4].name="a04";data[4].color="#fa7305";data[4].colorname="Orange";
+        data[37].name="a37";data[37].color="#fa7305";data[37].colorname="Orange";
+        data[42].name="a42";data[42].color="#fa7305";data[42].colorname="Orange";
+        data[44].name="a44";data[44].color="#fa7305";data[44].colorname="Orange";
+        data[50].name="a50";data[50].color="#fa7305";data[50].colorname="Orange";
+
         data[5].name="a05";data[5].color="#ffff00";data[5].colorname="Yellow";
 
         data[6].name="a06";data[6].color="#553426";data[6].colorname="Brown";
