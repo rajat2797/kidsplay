@@ -68,11 +68,11 @@ public class homepage extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
 
-//        SharedPreferences preferences = getSharedPreferences("prefs", 0);
-//        boolean first = preferences.getBoolean("first", true);
-//        if(first){
-//            startActivityForResult(new Intent(this, IntroActivity.class),INSTRUCTIONS);
-//        }
+        SharedPreferences preferences = getSharedPreferences("prefs", 0);
+        boolean first = preferences.getBoolean("first", true);
+        if(first){
+            startActivityForResult(new Intent(this, IntroActivity.class),INSTRUCTIONS);
+        }
 
         data = new collection[100];
         colourdatas = new colourdata[20];
@@ -109,7 +109,7 @@ public class homepage extends AppCompatActivity{
         adjustlayout();
         findrand();
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(width+50,width+50);
-        layoutParams.setMarginStart( displayMetrics.widthPixels/2-(width/2)-50 );
+        layoutParams.leftMargin = displayMetrics.widthPixels/2-(width/2)-50;
         layoutParams.topMargin = displayMetrics.heightPixels/2-width*2;
         imageView.setLayoutParams(layoutParams);
         imageView.setOnTouchListener(new ChoiceTouchListner() );
@@ -130,11 +130,11 @@ public class homepage extends AppCompatActivity{
             final int Y = (int)event.getRawY();
             Log.d("Line 119 x = ", "" + X);
             Log.d("Line 120 y = ", "" + Y);
-            if(X>=mainimage.getX() && X<=mainimage.getX() + mainimage.getWidth() &&
-                    Y>=mainimage.getY() && Y<=mainimage.getY() + mainimage.getHeight()){
+//            if(X>=mainimage.getX() &&
+//                    Y>=mainimage.getY() && Y<=mainimage.getY() + mainimage.getHeight()){
 //                Toast.makeText(getApplicationContext(), "Correct Answer", Toast.LENGTH_SHORT).show();
 //                correct_while_dragging();
-            }
+//            }
             switch (event.getAction() & MotionEvent.ACTION_MASK){
                 case MotionEvent.ACTION_DOWN:
                     speak(cname);
@@ -163,45 +163,45 @@ public class homepage extends AppCompatActivity{
     }
                                     /*............................................*/
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if(requestCode == INSTRUCTIONS){
-//            SharedPreferences settings = getSharedPreferences("prefs", 0);
-//            SharedPreferences.Editor editor = settings.edit();
-//            editor.putBoolean("first", false);
-//            editor.commit();
-//            Toast.makeText(this ,"" + settings.getBoolean("first", true), Toast.LENGTH_SHORT).show();
-//        }
-//    }
-
-    private void correct_while_dragging(){
-        flag=false;
-        try_count = 0;
-        wincount+=1;
-        appreciate();
-        if( wincount==5 ) {
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    showdance();
-                    wincount = 0;
-                    changeimage();
-                    changeposition();
-                }
-            }, 2300);
-        }
-        else{
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    changeimage();
-                    changeposition();
-                }
-            }, 2300);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == INSTRUCTIONS){
+            SharedPreferences settings = getSharedPreferences("prefs", 0);
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putBoolean("first", false);
+            editor.commit();
+            Toast.makeText(this ,"" + settings.getBoolean("first", true), Toast.LENGTH_SHORT).show();
         }
     }
+
+//    private void correct_while_dragging(){
+//        flag=false;
+//        try_count = 0;
+//        wincount+=1;
+//        appreciate();
+//        if( wincount==5 ) {
+//            Handler handler = new Handler();
+//            handler.postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    showdance();
+//                    wincount = 0;
+//                    changeimage();
+//                    changeposition();
+//                }
+//            }, 2300);
+//        }
+//        else{
+//            Handler handler = new Handler();
+//            handler.postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    changeimage();
+//                    changeposition();
+//                }
+//            }, 2300);
+//        }
+//    }
 
 
                                             /* Check for win or loose */
@@ -212,7 +212,7 @@ public class homepage extends AppCompatActivity{
             setMarginOfViews(mainimage);
             flag = true;
         }
-        if( (checkpar.topMargin+(width/2)>=martop&&checkpar.topMargin+(width/2)<=marbottom)
+        if( checkpar.topMargin+(width/2)>=martop
                 &&(checkpar.leftMargin+(width/2)>=marleft&&checkpar.leftMargin+(width/2)<=marright)
                 ){
             flag=false;
@@ -310,7 +310,7 @@ public class homepage extends AppCompatActivity{
     /* reverting to initial position */
     private void changeposition(){
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(width+50,width+50);
-        layoutParams.setMarginStart( displayMetrics.widthPixels/2-(width/2)-50 );
+        layoutParams.leftMargin = displayMetrics.widthPixels/2-(width/2)-50;
         layoutParams.topMargin = displayMetrics.heightPixels/2-width*2;
         imageView.setLayoutParams(layoutParams);
     }
@@ -503,16 +503,16 @@ public class homepage extends AppCompatActivity{
         /* taking a square box ==> width = height */
         ViewGroup.MarginLayoutParams marginLayoutParams;
         marginLayoutParams = (ViewGroup.MarginLayoutParams) im1.getLayoutParams();
-        marginLayoutParams.setMarginStart(20);
+        marginLayoutParams.leftMargin = 20;
         im1.getLayoutParams().width=width;im1.getLayoutParams().height=width;
         marginLayoutParams = (ViewGroup.MarginLayoutParams) im2.getLayoutParams();
-        marginLayoutParams.setMarginStart(10);
+        marginLayoutParams.leftMargin = 10;
         im2.getLayoutParams().width=width;im2.getLayoutParams().height=width;
         marginLayoutParams = (ViewGroup.MarginLayoutParams) im3.getLayoutParams();
-        marginLayoutParams.setMarginStart(10);
+        marginLayoutParams.leftMargin = 10;
         im3.getLayoutParams().width=width;im3.getLayoutParams().height=width;
         marginLayoutParams = (ViewGroup.MarginLayoutParams) im4.getLayoutParams();
-        marginLayoutParams.setMarginStart(10);
+        marginLayoutParams.leftMargin = 10;
         im4.getLayoutParams().width=width;im4.getLayoutParams().height=width;
 
         ImageView rating = (ImageView)findViewById(R.id.ratingbg);

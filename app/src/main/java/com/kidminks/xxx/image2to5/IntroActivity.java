@@ -2,6 +2,7 @@ package com.kidminks.xxx.image2to5;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -73,13 +75,17 @@ public class IntroActivity extends AppCompatActivity {
         String utteranceId=this.hashCode() + "";
         tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, utteranceId);
     }
-
+    boolean transfer = false;
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if(hasFocus){
             speak("Match the image with its corresponding color");
-            anim();
+            if(!transfer) {
+                anim();
+                transfer = true;
+                Log.i("what","the fuck");
+            }
         }
     }
 
@@ -91,12 +97,6 @@ public class IntroActivity extends AppCompatActivity {
             @Override
             public void run() {
                 hand.setVisibility(View.VISIBLE);
-                Log.d("Tag", "hand x: " + hand.getX());
-                Log.d("Tag", "hand y: " + hand.getY());
-
-                Log.d("Tag", "im2 x: " + coordinates[0]);
-                Log.d("Tag", "im2 y: " + coordinates[1]);
-
                 hand.animate()
                         .x(coordinates[0])
                         .y(coordinates[1])
@@ -113,7 +113,13 @@ public class IntroActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                Log.i("change","it");
+                SharedPreferences preferences = getSharedPreferences("prefs", 0);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putBoolean("first", false);
+                editor.commit();
                 startActivity(new Intent(getApplicationContext(), homepage.class));
+                finish();
             }
         }, 10000);
 

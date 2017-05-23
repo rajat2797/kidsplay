@@ -66,4 +66,13 @@
         android:layout_alignBottom="@+id/image"
         android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Intro Activity"
+        android:textSize="24sp" />
+
 </RelativeLayout>
