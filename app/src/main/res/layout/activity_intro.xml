@@ -15,7 +15,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="80dp"
         android:id="@+id/image"
-        android:src="@drawable/a1"
+        android:src="@drawable/a01"
         android:layout_width="110dp"
         android:layout_height="90dp" />
 
