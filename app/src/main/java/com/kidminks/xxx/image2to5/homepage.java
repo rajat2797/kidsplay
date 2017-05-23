@@ -40,7 +40,7 @@ public class homepage extends AppCompatActivity{
     String[] letsdance;
     private boolean reflag;
     int wincount = 0;
-    private final int dataavailable = 5;
+    private final int dataavailable = 50;
     private int try_count = 0;
     ImageView[] star;
     float x,y;
@@ -473,6 +473,10 @@ public class homepage extends AppCompatActivity{
         data[50].name="a50";data[50].color="#fa7305";data[50].colorname="Orange";
 
         data[5].name="a05";data[5].color="#ffff00";data[5].colorname="Yellow";
+        data[18].name="a18";data[18].color="#ffff00";data[18].colorname="Yellow";
+        data[39].name="a39";data[39].color="#ffff00";data[39].colorname="Yellow";
+        data[43].name="a43";data[43].color="#ffff00";data[43].colorname="Yellow";
+        data[46].name="a46";data[46].color="#ffff00";data[46].colorname="Yellow";
 
         data[6].name="a06";data[6].color="#553426";data[6].colorname="Brown";
         data[7].name="a07";data[7].color="#553426";data[7].colorname="Brown";
