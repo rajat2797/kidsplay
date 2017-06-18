@@ -8,6 +8,7 @@ public class collection {
     public String name;
     public String color;
     public String colorname;
+    public String objectName;
     public collection(){
     }
 }

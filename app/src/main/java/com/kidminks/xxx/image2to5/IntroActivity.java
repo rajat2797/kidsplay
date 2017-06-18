@@ -84,7 +84,7 @@ public class IntroActivity extends AppCompatActivity {
             if(!transfer) {
                 anim();
                 transfer = true;
-                Log.i("what","the fuck");
+                Log.i("IntroActivity","Line 87");
             }
         }
     }
@@ -114,10 +114,10 @@ public class IntroActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Log.i("change","it");
-                SharedPreferences preferences = getSharedPreferences("prefs", 0);
+                /*SharedPreferences preferences = getSharedPreferences("prefs", 0);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putBoolean("first", false);
-                editor.commit();
+                editor.commit();*/
                 startActivity(new Intent(getApplicationContext(), homepage.class));
                 finish();
             }

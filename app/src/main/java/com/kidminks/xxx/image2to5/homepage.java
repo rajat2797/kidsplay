@@ -28,7 +28,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.RunnableFuture;
 
@@ -46,6 +48,7 @@ public class homepage extends AppCompatActivity{
     float x,y;
     private float starheight,starwidth;
     private boolean f=false;
+    private List<Integer> idList = new ArrayList<Integer>();
 
 
     DisplayMetrics displayMetrics;
@@ -68,12 +71,13 @@ public class homepage extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
 
+        /*
         SharedPreferences preferences = getSharedPreferences("prefs", 0);
         boolean first = preferences.getBoolean("first", true);
         if(first){
             startActivityForResult(new Intent(this, IntroActivity.class),INSTRUCTIONS);
         }
-
+        */
         data = new collection[100];
         colourdatas = new colourdata[20];
         letsdance = new String[7];
@@ -163,6 +167,7 @@ public class homepage extends AppCompatActivity{
     }
                                     /*............................................*/
 
+    /*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == INSTRUCTIONS){
@@ -173,7 +178,7 @@ public class homepage extends AppCompatActivity{
             Toast.makeText(this ,"" + settings.getBoolean("first", true), Toast.LENGTH_SHORT).show();
         }
     }
-
+    */
 //    private void correct_while_dragging(){
 //        flag=false;
 //        try_count = 0;
@@ -220,16 +225,24 @@ public class homepage extends AppCompatActivity{
             wincount+=1;
             appreciate();
             if( wincount==5 ) {
+                idList.clear();
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         showdance();
                         wincount = 0;
+                    }
+                }, 2800);
+
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
                         changeimage();
                         changeposition();
                     }
-                }, 2800);
+                }, 8800);
+
             }
             else{
                 Handler handler = new Handler();
@@ -448,65 +461,65 @@ public class homepage extends AppCompatActivity{
             data[i] = new collection();
         }
         flag = false;
-        data[1].name="a01";data[1].color="#32cd32";data[1].colorname="Green";
-        data[27].name="a27";data[27].color="#32cd32";data[27].colorname="Green";
-        data[34].name="a34";data[34].color="#32cd32";data[34].colorname="Green";
-        data[40].name="a40";data[40].color="#32cd32";data[40].colorname="Green";
-        data[45].name="a45";data[45].color="#32cd32";data[45].colorname="Green";
+        data[1].name="a01";data[1].color="#32cd32";data[1].colorname="Green";data[1].objectName="Chair";
+        data[27].name="a27";data[27].color="#32cd32";data[27].colorname="Green";data[27].objectName="Leaf";
+        data[34].name="a34";data[34].color="#32cd32";data[34].colorname="Green";data[34].objectName="Scissor";
+        data[40].name="a40";data[40].color="#32cd32";data[40].colorname="Green";data[40].objectName="Cauliflower";
+        data[45].name="a45";data[45].color="#32cd32";data[45].colorname="Green";data[45].objectName="Hat";
 
-        data[2].name="a02";data[2].color="#ff0000";data[2].colorname="Red";
-        data[23].name="a23";data[23].color="#ff0000";data[23].colorname="Red";
-        data[33].name="a33";data[33].color="#ff0000";data[33].colorname="Red";
-        data[38].name="a38";data[38].color="#ff0000";data[38].colorname="Red";
-        data[49].name="a49";data[49].color="#ff0000";data[49].colorname= "Red";
+        data[2].name="a02";data[2].color="#ff0000";data[2].colorname="Red";data[2].objectName="Sofa";
+        data[23].name="a23";data[23].color="#ff0000";data[23].colorname="Red";data[23].objectName="Litchi";
+        data[33].name="a33";data[33].color="#ff0000";data[33].colorname="Red";data[33].objectName="An Apple";
+        data[38].name="a38";data[38].color="#ff0000";data[38].colorname="Red";data[38].objectName="An Umbrella";
+        data[49].name="a49";data[49].color="#ff0000";data[49].colorname= "Red";data[49].objectName="Shoe";
 
-        data[3].name="a03";data[3].color="#1e90ff";data[3].colorname="Blue";
-        data[36].name="a36";data[36].color="#1e90ff";data[36].colorname="Blue";
-        data[41].name="a41";data[41].color="#1e90ff";data[41].colorname="Blue";
-        data[47].name="a47";data[47].color="#1e90ff";data[47].colorname="Blue";
-        data[48].name="a48";data[48].color="#1e90ff";data[48].colorname="Blue";
+        data[3].name="a03";data[3].color="#1e90ff";data[3].colorname="Blue";data[3].objectName="Balloon";
+        data[36].name="a36";data[36].color="#1e90ff";data[36].colorname="Blue";data[36].objectName="Sofa";
+        data[41].name="a41";data[41].color="#1e90ff";data[41].colorname="Blue";data[41].objectName="An Antique Bottle";
+        data[47].name="a47";data[47].color="#1e90ff";data[47].colorname="Blue";data[47].objectName="Pair of Shoes";
+        data[48].name="a48";data[48].color="#1e90ff";data[48].colorname="Blue";data[48].objectName="Car";
 
-        data[4].name="a04";data[4].color="#fa7305";data[4].colorname="Orange";
-        data[37].name="a37";data[37].color="#fa7305";data[37].colorname="Orange";
-        data[42].name="a42";data[42].color="#fa7305";data[42].colorname="Orange";
-        data[44].name="a44";data[44].color="#fa7305";data[44].colorname="Orange";
-        data[50].name="a50";data[50].color="#fa7305";data[50].colorname="Orange";
+        data[4].name="a04";data[4].color="#fa7305";data[4].colorname="Orange";data[4].objectName="Orange";
+        data[37].name="a37";data[37].color="#fa7305";data[37].colorname="Orange";data[37].objectName="Scissor";
+        data[42].name="a42";data[42].color="#fa7305";data[42].colorname="Orange";data[42].objectName="Fish";
+        data[44].name="a44";data[44].color="#fa7305";data[44].colorname="Orange";data[44].objectName="Man";
+        data[50].name="a50";data[50].color="#fa7305";data[50].colorname="Orange";data[50].objectName="Cold Drink";
 
-        data[5].name="a05";data[5].color="#ffff00";data[5].colorname="Yellow";
-        data[18].name="a18";data[18].color="#ffff00";data[18].colorname="Yellow";
-        data[39].name="a39";data[39].color="#ffff00";data[39].colorname="Yellow";
-        data[43].name="a43";data[43].color="#ffff00";data[43].colorname="Yellow";
-        data[46].name="a46";data[46].color="#ffff00";data[46].colorname="Yellow";
+        data[5].name="a05";data[5].color="#ffff00";data[5].colorname="Yellow";data[5].objectName="Banana";
+        data[18].name="a18";data[18].color="#ffff00";data[18].colorname="Yellow";data[18].objectName="Sunflower";
+        data[39].name="a39";data[39].color="#ffff00";data[39].colorname="Yellow";data[39].objectName="Pikachu";
+        data[43].name="a43";data[43].color="#ffff00";data[43].colorname="Yellow";data[43].objectName="Cheese";
+        data[46].name="a46";data[46].color="#ffff00";data[46].colorname="Yellow";data[46].objectName="Board Pin";
 
-        data[6].name="a06";data[6].color="#553426";data[6].colorname="Brown";
-        data[7].name="a07";data[7].color="#553426";data[7].colorname="Brown";
-        data[10].name="a10";data[10].color="#553426";data[10].colorname="Brown";
-        data[12].name="a12";data[12].color="#553426";data[11].colorname="Brown";
-        data[14].name="a14";data[14].color="#553426";data[14].colorname="Brown";
+        data[6].name="a06";data[6].color="#553426";data[6].colorname="Brown";data[6].objectName="Hat";
+        data[7].name="a07";data[7].color="#553426";data[7].colorname="Brown";data[7].objectName="Snail";
+        data[10].name="a10";data[10].color="#553426";data[10].colorname="Brown";data[10].objectName="Rugby Ball";
+        data[12].name="a12";data[12].color="#553426";data[12].colorname="Brown";data[12].objectName="Teddy Bear";
+        data[14].name="a14";data[14].color="#553426";data[14].colorname="Brown";data[14].objectName="Violin";
 
-        data[8].name="a08";data[8].color="#030303";data[8].colorname="Black";
-        data[11].name="a11";data[11].color="#030303";data[11].colorname="Black";
-        data[13].name="a13";data[13].color="#030303";data[13].colorname="Black";
-        data[15].name="a15";data[15].color="#030303";data[15].colorname="Black";
-        data[20].name="a20";data[20].color="#030303";data[20].colorname="Black";
+        data[8].name="a08";data[8].color="#030303";data[8].colorname="Black";data[8].objectName="An Umbrella";
+        data[11].name="a11";data[11].color="#030303";data[11].colorname="Black";data[11].objectName="Bear";
+        data[13].name="a13";data[13].color="#030303";data[13].colorname="Black";data[13].objectName="Vase";
+        data[15].name="a15";data[15].color="#030303";data[15].colorname="Black";data[15].objectName="Bird";
+        data[20].name="a20";data[20].color="#030303";data[20].colorname="Black";data[20].objectName="Shoe";
 
-        data[9].name="a09";data[9].color="#fa05ac";data[9].colorname="Pink";
-        data[17].name="a17";data[17].color="#fa05ac";data[17].colorname="Pink";
-        data[21].name="a21";data[21].color="#fa05ac";data[21].colorname="Pink";
-        data[24].name="a24";data[24].color="#fa05ac";data[24].colorname="Pink";
-        data[30].name="a30";data[30].color="#fa05ac";data[30].colorname="Pink";
+        data[9].name="a09";data[9].color="#fa05ac";data[9].colorname="Pink";data[9].objectName="Flamingo";
+        data[17].name="a17";data[17].color="#fa05ac";data[17].colorname="Pink";data[17].objectName="Baby Elephant";
+        data[21].name="a21";data[21].color="#fa05ac";data[21].colorname="Pink";data[21].objectName="Kirby";
+        data[24].name="a24";data[24].color="#fa05ac";data[24].colorname="Pink";data[24].objectName="Pink Rose";
+        data[30].name="a30";data[30].color="#fa05ac";data[30].colorname="Pink";data[30].objectName="Mario";
 
-        data[16].name="a16";data[16].color="#a709f6";data[16].colorname="Purple";
-        data[19].name="a19";data[19].color="#a709f6";data[19].colorname="Purple";
-        data[25].name="a25";data[25].color="#a709f6";data[25].colorname="Purple";
-        data[28].name="a28";data[28].color="#a709f6";data[28].colorname="Purple";
-        data[32].name="a16";data[32].color="#a709f6";data[32].colorname="Purple";
+        data[16].name="a16";data[16].color="#a709f6";data[16].colorname="Purple";data[16].objectName="An Eggplant";
+        data[19].name="a19";data[19].color="#a709f6";data[19].colorname="Purple";data[19].objectName="Butterfly";
+        data[25].name="a25";data[25].color="#a709f6";data[25].colorname="Purple";data[25].objectName="Spectacles";
+        data[28].name="a28";data[28].color="#a709f6";data[28].colorname="Purple";data[28].objectName="Sandal";
+        data[32].name="a16";data[32].color="#a709f6";data[32].colorname="Purple";data[32].objectName="Kettle";
 
-        data[22].name="a22";data[22].color="#555555";data[22].colorname="Grey";
-        data[26].name="a26";data[26].color="#555555";data[26].colorname="Grey";
-        data[29].name="a29";data[29].color="#555555";data[29].colorname="Grey";
-        data[32].name="a32";data[32].color="#555555";data[32].colorname="Grey";
-        data[35].name="a35";data[35].color="#555555";data[35].colorname="Grey";
+        data[22].name="a22";data[22].color="#555555";data[22].colorname="Grey";data[22].objectName="T-Shirt";
+        data[26].name="a26";data[26].color="#555555";data[26].colorname="Grey";data[26].objectName="An Elephant";
+        data[29].name="a29";data[29].color="#555555";data[29].colorname="Grey";data[29].objectName="Grey Parrot";
+        data[31].name="a32";data[31].color="#555555";data[31].colorname="Grey";data[31].objectName="Ice Cream";
+        data[35].name="a35";data[35].color="#555555";data[35].colorname="Grey";data[35].objectName="Pair of Socks";
     }
     /*initialization colour .................... only once */
     private void initializecolor(){
@@ -581,7 +594,7 @@ public class homepage extends AppCompatActivity{
         int rand = (int)(Math.random()*5)+1;
         switch (rand){
             case 1:speak("Incredible");break;
-            case 2:speak("Good");break;
+            case 2:speak("Good Work");break;
             case 3:speak("Nice");break;
             case 4:speak("Awesome");break;
             case 5:speak("Outstanding");break;
@@ -597,7 +610,7 @@ public class homepage extends AppCompatActivity{
             case 2:speak("Wrong");break;
             case 3:speak("Try Again");break;
             case 4:speak("Nice Try");break;
-            case 5:speak("sorry it is "+cname);break;
+            case 5:speak("sorry it is "+ cname);break;
         }
     }
 
@@ -628,9 +641,26 @@ public class homepage extends AppCompatActivity{
                                     /* randomizing all, image and box colours */
 
     private void findrand(){
-        int id = (int)(Math.random()*dataavailable)+1;
+        int id = -1, j;
+        boolean f=false;
+        while(!f){
+            f = true;
+            id = (int)(Math.random()*dataavailable)+1;
+            if(idList!=null){
+                for(j=0;j<idList.size();j++){
+                    if(id == idList.get(j)){
+                        f = false;
+                        break;
+                    }
+                }
+            }
+        }
+
+        idList.add(id);
         String name = data[id].name;
         String color = data[id].color;
+        String objectName = data[id].objectName;
+        speak(objectName);
         cname = data[id].colorname;
         int imageid = getResources().getIdentifier(name,"drawable",getPackageName());
         imageView.setImageResource(imageid);
@@ -843,6 +873,12 @@ public class homepage extends AppCompatActivity{
             ttsUnder20(text);
         }
     }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        return super.dispatchTouchEvent(ev);
+    }
+
     @SuppressWarnings("deprecation")
     private void ttsUnder20(String text) {
         HashMap<String, String> map = new HashMap<>();
