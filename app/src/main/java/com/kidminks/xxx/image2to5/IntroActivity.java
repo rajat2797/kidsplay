@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -54,6 +55,17 @@ public class IntroActivity extends AppCompatActivity {
         image = (ImageView) findViewById(R.id.image);
         hand = (ImageView) findViewById(R.id.hand);
         hand.setVisibility(View.INVISIBLE);
+
+        ViewGroup.MarginLayoutParams margin;
+        margin = (ViewGroup.MarginLayoutParams) im1.getLayoutParams();
+        margin.leftMargin = 20; margin.bottomMargin = 6;
+        margin = (ViewGroup.MarginLayoutParams) im2.getLayoutParams();
+        margin.leftMargin = 10; margin.bottomMargin = 6;
+        margin = (ViewGroup.MarginLayoutParams) im3.getLayoutParams();
+        margin.leftMargin = 10; margin.bottomMargin = 6;
+        margin = (ViewGroup.MarginLayoutParams) im4.getLayoutParams();
+        margin.leftMargin = 10; margin.bottomMargin = 6;
+
     }
 
     private void speak( String text){

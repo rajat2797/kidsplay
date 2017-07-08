@@ -13,7 +13,7 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="90dp"
         android:id="@+id/image"
         android:src="@drawable/a01"
         android:layout_width="110dp"
@@ -72,7 +72,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="WELCOME TO COLOUR PLAY"
-        android:textSize="24sp" />
+        android:text="WELCOME TO COLOR PLAY"
+        android:shadowColor="#edce87"
+        android:shadowDx="-2"
+        android:shadowDy="-2"
+        android:shadowRadius="3"
+        android:textColor="#513901"
+        android:layout_marginTop="20dp"
+        android:textSize="26sp" />
 
 </RelativeLayout>
