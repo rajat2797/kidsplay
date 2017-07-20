@@ -474,7 +474,7 @@ public class homepage extends AppCompatActivity{
         data[49].name="a49";data[49].color="#ff0000";data[49].colorname= "Red";data[49].objectName="Shoe";
 
         data[3].name="a03";data[3].color="#1e90ff";data[3].colorname="Blue";data[3].objectName="Balloon";
-        data[36].name="a36";data[36].color="#1e90ff";data[36].colorname="Blue";data[36].objectName="Sofa";
+        data[36].name="a36";data[36].color="#1E45CD";data[36].colorname="Blue";data[36].objectName="Sofa";
         data[41].name="a41";data[41].color="#1e90ff";data[41].colorname="Blue";data[41].objectName="An Antique Bottle";
         data[47].name="a47";data[47].color="#1e90ff";data[47].colorname="Blue";data[47].objectName="Pair of Shoes";
         data[48].name="a48";data[48].color="#1e90ff";data[48].colorname="Blue";data[48].objectName="Car";
@@ -486,28 +486,28 @@ public class homepage extends AppCompatActivity{
         data[50].name="a50";data[50].color="#fa7305";data[50].colorname="Orange";data[50].objectName="Cold Drink";
 
         data[5].name="a05";data[5].color="#ffff00";data[5].colorname="Yellow";data[5].objectName="Banana";
-        data[18].name="a18";data[18].color="#ffff00";data[18].colorname="Yellow";data[18].objectName="Sunflower";
-        data[39].name="a39";data[39].color="#ffff00";data[39].colorname="Yellow";data[39].objectName="Pikachu";
-        data[43].name="a43";data[43].color="#ffff00";data[43].colorname="Yellow";data[43].objectName="Cheese";
+        data[18].name="a18";data[18].color="#E4B201";data[18].colorname="Yellow";data[18].objectName="Sunflower";
+        data[39].name="a39";data[39].color="#F8D41F";data[39].colorname="Yellow";data[39].objectName="Pikachu";
+        data[43].name="a43";data[43].color="#FDFD33";data[43].colorname="Yellow";data[43].objectName="Cheese";
         data[46].name="a46";data[46].color="#ffff00";data[46].colorname="Yellow";data[46].objectName="Board Pin";
 
         data[6].name="a06";data[6].color="#553426";data[6].colorname="Brown";data[6].objectName="Hat";
         data[7].name="a07";data[7].color="#553426";data[7].colorname="Brown";data[7].objectName="Snail";
-        data[10].name="a10";data[10].color="#553426";data[10].colorname="Brown";data[10].objectName="Rugby Ball";
-        data[12].name="a12";data[12].color="#553426";data[12].colorname="Brown";data[12].objectName="Teddy Bear";
-        data[14].name="a14";data[14].color="#553426";data[14].colorname="Brown";data[14].objectName="Violin";
+        data[10].name="a10";data[10].color="#AC4701";data[10].colorname="Brown";data[10].objectName="Rugby Ball";
+        data[12].name="a12";data[12].color="#A06121";data[12].colorname="Brown";data[12].objectName="Teddy Bear";
+        data[14].name="a14";data[14].color="#691C02";data[14].colorname="Brown";data[14].objectName="Violin";
 
-        data[8].name="a08";data[8].color="#030303";data[8].colorname="Black";data[8].objectName="An Umbrella";
-        data[11].name="a11";data[11].color="#030303";data[11].colorname="Black";data[11].objectName="Bear";
-        data[13].name="a13";data[13].color="#030303";data[13].colorname="Black";data[13].objectName="Vase";
-        data[15].name="a15";data[15].color="#030303";data[15].colorname="Black";data[15].objectName="Bird";
-        data[20].name="a20";data[20].color="#030303";data[20].colorname="Black";data[20].objectName="Shoe";
+        data[8].name="a08";data[8].color="#020204";data[8].colorname="Black";data[8].objectName="Ball";
+        data[11].name="a11";data[11].color="#010101";data[11].colorname="Black";data[11].objectName="T-Shirt";
+        data[13].name="a13";data[13].color="#010101";data[13].colorname="Black";data[13].objectName="Vase";
+        data[15].name="a15";data[15].color="#010101";data[15].colorname="Black";data[15].objectName="Bird";
+        data[20].name="a20";data[20].color="#010101";data[20].colorname="Black";data[20].objectName="Crow";
 
-        data[9].name="a09";data[9].color="#fa05ac";data[9].colorname="Pink";data[9].objectName="Flamingo";
+        data[9].name="a09";data[9].color="#FB87BB";data[9].colorname="Pink";data[9].objectName="Flamingo";
         data[17].name="a17";data[17].color="#fa05ac";data[17].colorname="Pink";data[17].objectName="Baby Elephant";
-        data[21].name="a21";data[21].color="#fa05ac";data[21].colorname="Pink";data[21].objectName="Kirby";
+        data[21].name="a21";data[21].color="#FCAFE2";data[21].colorname="Pink";data[21].objectName="Kirby";
         data[24].name="a24";data[24].color="#fa05ac";data[24].colorname="Pink";data[24].objectName="Pink Rose";
-        data[30].name="a30";data[30].color="#fa05ac";data[30].colorname="Pink";data[30].objectName="Mario";
+        data[30].name="a30";data[30].color="#D74C8F";data[30].colorname="Pink";data[30].objectName="Mario";
 
         data[16].name="a16";data[16].color="#691D7E";data[16].colorname="Purple";data[16].objectName="An Eggplant";
         data[19].name="a19";data[19].color="#a709f6";data[19].colorname="Purple";data[19].objectName="Butterfly";
@@ -518,8 +518,8 @@ public class homepage extends AppCompatActivity{
         data[22].name="a22";data[22].color="#8E8C8D";data[22].colorname="Grey";data[22].objectName="T-Shirt";
         data[26].name="a26";data[26].color="#7F7F7F";data[26].colorname="Grey";data[26].objectName="An Elephant";
         data[29].name="a29";data[29].color="#51566A";data[29].colorname="Grey";data[29].objectName="Grey Parrot";
-        data[31].name="a31";data[31].color="#555555";data[31].colorname="Grey";data[31].objectName="Goat";
-        data[35].name="a35";data[35].color="#555555";data[35].colorname="Grey";data[35].objectName="Shark";
+        data[31].name="a31";data[31].color="#949494";data[31].colorname="Grey";data[31].objectName="Racoon";
+        data[35].name="a35";data[35].color="#AEAEAE";data[35].colorname="Grey";data[35].objectName="Shark";
     }
     /*initialization colour .................... only once */
     private void initializecolor(){
