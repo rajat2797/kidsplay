@@ -29,7 +29,8 @@
             android:id="@+id/im1"
             android:src="@drawable/circle"
             android:tint="@color/circle1"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content" />
 
         <ImageView
@@ -37,7 +38,8 @@
             android:id="@+id/im2"
             android:src="@drawable/circle"
             android:tint="@color/circle2"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content" />
 
         <ImageView
@@ -45,7 +47,8 @@
             android:id="@+id/im3"
             android:src="@drawable/circle"
             android:tint="@color/circle3"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content" />
 
         <ImageView
@@ -53,7 +56,8 @@
             android:id="@+id/im4"
             android:src="@drawable/circle"
             android:tint="@color/circle4"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content" />
 
     </LinearLayout>
@@ -78,7 +82,6 @@
         android:shadowDy="-2"
         android:shadowRadius="3"
         android:textColor="#513901"
-        android:layout_marginTop="20dp"
-        android:textSize="26sp" />
+        android:layout_marginTop="20dp" />
 
 </RelativeLayout>

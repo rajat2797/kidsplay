@@ -462,13 +462,13 @@ public class homepage extends AppCompatActivity{
         }
         flag = false;
         data[1].name="a01";data[1].color="#32cd32";data[1].colorname="Green";data[1].objectName="Chair";
-        data[27].name="a27";data[27].color="#32cd32";data[27].colorname="Green";data[27].objectName="Leaf";
-        data[34].name="a34";data[34].color="#32cd32";data[34].colorname="Green";data[34].objectName="Scissor";
+        data[27].name="a27";data[27].color="#5F9B23";data[27].colorname="Green";data[27].objectName="Leaf";
+        data[34].name="a34";data[34].color="#788D27";data[34].colorname="Green";data[34].objectName="Scissor";
         data[40].name="a40";data[40].color="#32cd32";data[40].colorname="Green";data[40].objectName="Cauliflower";
         data[45].name="a45";data[45].color="#32cd32";data[45].colorname="Green";data[45].objectName="Hat";
 
         data[2].name="a02";data[2].color="#ff0000";data[2].colorname="Red";data[2].objectName="Sofa";
-        data[23].name="a23";data[23].color="#ff0000";data[23].colorname="Red";data[23].objectName="Litchi";
+        data[23].name="a23";data[23].color="#ff0000";data[23].colorname="Red";data[23].objectName="Strawberry";
         data[33].name="a33";data[33].color="#ff0000";data[33].colorname="Red";data[33].objectName="An Apple";
         data[38].name="a38";data[38].color="#ff0000";data[38].colorname="Red";data[38].objectName="An Umbrella";
         data[49].name="a49";data[49].color="#ff0000";data[49].colorname= "Red";data[49].objectName="Shoe";
@@ -509,17 +509,17 @@ public class homepage extends AppCompatActivity{
         data[24].name="a24";data[24].color="#fa05ac";data[24].colorname="Pink";data[24].objectName="Pink Rose";
         data[30].name="a30";data[30].color="#fa05ac";data[30].colorname="Pink";data[30].objectName="Mario";
 
-        data[16].name="a16";data[16].color="#a709f6";data[16].colorname="Purple";data[16].objectName="An Eggplant";
+        data[16].name="a16";data[16].color="#691D7E";data[16].colorname="Purple";data[16].objectName="An Eggplant";
         data[19].name="a19";data[19].color="#a709f6";data[19].colorname="Purple";data[19].objectName="Butterfly";
-        data[25].name="a25";data[25].color="#a709f6";data[25].colorname="Purple";data[25].objectName="Spectacles";
-        data[28].name="a28";data[28].color="#a709f6";data[28].colorname="Purple";data[28].objectName="Sandal";
-        data[32].name="a16";data[32].color="#a709f6";data[32].colorname="Purple";data[32].objectName="Kettle";
+        data[25].name="a25";data[25].color="#69349D";data[25].colorname="Purple";data[25].objectName="Spectacles";
+        data[28].name="a28";data[28].color="#753078";data[28].colorname="Purple";data[28].objectName="Sandal";
+        data[32].name="a32";data[32].color="#331940";data[32].colorname="Purple";data[32].objectName="Kettle";
 
-        data[22].name="a22";data[22].color="#555555";data[22].colorname="Grey";data[22].objectName="T-Shirt";
-        data[26].name="a26";data[26].color="#555555";data[26].colorname="Grey";data[26].objectName="An Elephant";
-        data[29].name="a29";data[29].color="#555555";data[29].colorname="Grey";data[29].objectName="Grey Parrot";
-        data[31].name="a32";data[31].color="#555555";data[31].colorname="Grey";data[31].objectName="Ice Cream";
-        data[35].name="a35";data[35].color="#555555";data[35].colorname="Grey";data[35].objectName="Pair of Socks";
+        data[22].name="a22";data[22].color="#8E8C8D";data[22].colorname="Grey";data[22].objectName="T-Shirt";
+        data[26].name="a26";data[26].color="#7F7F7F";data[26].colorname="Grey";data[26].objectName="An Elephant";
+        data[29].name="a29";data[29].color="#51566A";data[29].colorname="Grey";data[29].objectName="Grey Parrot";
+        data[31].name="a31";data[31].color="#555555";data[31].colorname="Grey";data[31].objectName="Goat";
+        data[35].name="a35";data[35].color="#555555";data[35].colorname="Grey";data[35].objectName="Shark";
     }
     /*initialization colour .................... only once */
     private void initializecolor(){

@@ -13,10 +13,12 @@ import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.w3c.dom.Text;
@@ -28,6 +30,7 @@ import java.util.TimerTask;
 
 public class IntroActivity extends AppCompatActivity {
 
+    TextView tv;
     ImageView im1,im2,im3,im4,image,hand;
     TextToSpeech tts;
 
@@ -48,6 +51,8 @@ public class IntroActivity extends AppCompatActivity {
             }
         });
 
+        tv = (TextView) findViewById(R.id.textView);
+        tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.activity_vertical_margin));
         im1 = (ImageView) findViewById(R.id.im1);
         im2 = (ImageView) findViewById(R.id.im2);
         im3 = (ImageView) findViewById(R.id.im3);
