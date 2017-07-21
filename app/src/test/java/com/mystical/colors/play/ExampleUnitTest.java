@@ -1,4 +1,4 @@
-package com.kidminks.xxx.image2to5;
+package com.mystical.colors.play;
 
 import org.junit.Test;
 

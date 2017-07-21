@@ -7,7 +7,7 @@
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
     android:background="#fff"
-    tools:context="com.kidminks.xxx.image2to5.homepage" >
+    tools:context="com.mystical.colors.play.homepage" >
 
     <ImageView
         android:layout_width="match_parent"

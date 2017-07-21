@@ -4,7 +4,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
     defaultConfig {
-        applicationId "com.kidminks.xxx.image2to5"
+        applicationId "com.mystical.colors.play"
         minSdkVersion 14
         targetSdkVersion 24
         versionCode 1

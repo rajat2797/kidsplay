@@ -1,9 +1,7 @@
-package com.kidminks.xxx.image2to5;
+package com.mystical.colors.play;
 
 
 import android.annotation.TargetApi;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
@@ -18,11 +16,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -32,7 +27,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.RunnableFuture;
 
 public class homepage extends AppCompatActivity{
 
@@ -482,11 +476,11 @@ public class homepage extends AppCompatActivity{
         data[4].name="a04";data[4].color="#fa7305";data[4].colorname="Orange";data[4].objectName="Orange";
         data[37].name="a37";data[37].color="#fa7305";data[37].colorname="Orange";data[37].objectName="Scissor";
         data[42].name="a42";data[42].color="#fa7305";data[42].colorname="Orange";data[42].objectName="Fish";
-        data[44].name="a44";data[44].color="#fa7305";data[44].colorname="Orange";data[44].objectName="Man";
+        data[44].name="a44";data[44].color="#D96937";data[44].colorname="Orange";data[44].objectName="Man";
         data[50].name="a50";data[50].color="#fa7305";data[50].colorname="Orange";data[50].objectName="Cold Drink";
 
         data[5].name="a05";data[5].color="#ffff00";data[5].colorname="Yellow";data[5].objectName="Banana";
-        data[18].name="a18";data[18].color="#E4B201";data[18].colorname="Yellow";data[18].objectName="Sunflower";
+        data[18].name="a18";data[18].color="#ffff00";data[18].colorname="Yellow";data[18].objectName="Sunflower";
         data[39].name="a39";data[39].color="#F8D41F";data[39].colorname="Yellow";data[39].objectName="Pikachu";
         data[43].name="a43";data[43].color="#FDFD33";data[43].colorname="Yellow";data[43].objectName="Cheese";
         data[46].name="a46";data[46].color="#ffff00";data[46].colorname="Yellow";data[46].objectName="Board Pin";
@@ -504,9 +498,9 @@ public class homepage extends AppCompatActivity{
         data[20].name="a20";data[20].color="#010101";data[20].colorname="Black";data[20].objectName="Crow";
 
         data[9].name="a09";data[9].color="#FB87BB";data[9].colorname="Pink";data[9].objectName="Flamingo";
-        data[17].name="a17";data[17].color="#fa05ac";data[17].colorname="Pink";data[17].objectName="Baby Elephant";
+        data[17].name="a17";data[17].color="#F6A5D5";data[17].colorname="Pink";data[17].objectName="Baby Elephant";
         data[21].name="a21";data[21].color="#FCAFE2";data[21].colorname="Pink";data[21].objectName="Kirby";
-        data[24].name="a24";data[24].color="#fa05ac";data[24].colorname="Pink";data[24].objectName="Pink Rose";
+        data[24].name="a24";data[24].color="#DA788D";data[24].colorname="Pink";data[24].objectName="Pink Rose";
         data[30].name="a30";data[30].color="#D74C8F";data[30].colorname="Pink";data[30].objectName="Mario";
 
         data[16].name="a16";data[16].color="#691D7E";data[16].colorname="Purple";data[16].objectName="An Eggplant";
